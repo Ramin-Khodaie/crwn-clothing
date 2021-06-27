@@ -18,11 +18,13 @@ const useStyle = makeStyles((theme) => ({
     paddingRight: "50px",
   },
   cardImage: {
-    transition:"all 1s ease",
+    transition: "all 1s ease",
     " &:hover": {
       cursor: "pointer",
-      transform:"scale(1.3)", 
-    
+      transform: "scale(1.4)",
+      width: "100%",
+      height: "100%",
+      margin: "auto",
     },
   },
 }));
@@ -31,12 +33,12 @@ export default function DirectoryItem({ title, size, image, id, linkUrl }) {
 
   return (
     <div className={classes.root}>
-      <Card style={{ height: "500px",margin:"auto",width:"100%" }}>
+      <Card style={{ height: "500px%", margin: "auto", width: "100%" }}>
         <CardHeader title={<Typography variant="h6">{title}</Typography>} />
 
         <CardMedia
           image={image}
-          style={{ width: "100%", height:"100%" }}
+          style={{ width: "100%", height: "400px" }}
           title={title}
           className={classes.cardImage}
         />

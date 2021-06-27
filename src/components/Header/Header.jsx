@@ -1,9 +1,13 @@
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import { makeStyles, Button,Slide,useScrollTrigger } from "@material-ui/core";
+import { makeStyles, Button, Slide, useScrollTrigger } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Typography } from "@material-ui/core";
+import { Link as Mlink } from "@material-ui/core";
+import Shop from "../../pages/ShopPage";
+import { Link } from "react-router-dom";
+import { signInPage } from "../../pages/signInPage";
 
 const useStyle = makeStyles(() => ({
   toolbar: {
@@ -15,19 +19,18 @@ const useStyle = makeStyles(() => ({
   },
   h6: {
     padding: "20px",
-    color:"black",
-    
-   
+    color: "black",
   },
-  loginbtn:{
-    color:"red",
-    position:"absolute",
-    marginRight:"15px",
-    right:"0"
-  }
+  loginbtn: {
+    color: "red",
+    position: "absolute",
+    marginRight: "15px",
+    marginTop: "2px",
+    right: "0",
+    marginTop: "-18px",
+  },
+  Mlink: {},
 }));
-
-
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -43,36 +46,42 @@ function HideOnScroll(props) {
   );
 }
 
-
-
 export default function Header() {
   const classes = useStyle();
   return (
     <div className={classes.root}>
       <HideOnScroll>
-      <AppBar position="fixed">
-        <Toolbar className={classes.toolbar} variant="regular">
-          <IconButton aria-label="menu" edge="start">
-            <MenuIcon />
-          </IconButton>
-          <div className={classes.h6}>
-            <Typography variant="h6" >Home</Typography>
+        <AppBar position="fixed">
+          <Toolbar className={classes.toolbar} variant="regular">
+            <IconButton aria-label="menu" edge="start">
+              <MenuIcon />
+            </IconButton>
+            <div className={classes.h6}>
+              <Mlink underline="none" href="/" color="inherit">
+                <Typography variant="h6">Home</Typography>
+              </Mlink>
+            </div>
+            <div className={classes.h6}>
+              <Mlink href="/shop" color="inherit" underline="none">
+                <Typography variant="h6">Shop</Typography>
+              </Mlink>
+            </div>
+            <div className={classes.h6}>
+              <Mlink underline="none" href="/about" color="inherit">
+                <Typography variant="h6">About</Typography>
+              </Mlink>
+            </div>
 
-          </div>
-          <div className={classes.h6}>
-            <Typography variant="h6">Shop</Typography>
-
-          </div>
-          <div className={classes.h6}>
-            <Typography variant="h6">About</Typography>
-
-          </div>
-
-          <Button className={classes.loginbtn} variant="outlined">Login</Button>
-        </Toolbar>
-      </AppBar>
+            <div>
+              <Mlink href="/signIn">
+                <Button className={classes.loginbtn} variant="outlined">
+                  Login
+                </Button>
+              </Mlink>
+            </div>
+          </Toolbar>
+        </AppBar>
       </HideOnScroll>
-      
     </div>
   );
 }
