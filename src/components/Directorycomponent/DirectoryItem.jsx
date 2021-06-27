@@ -18,23 +18,11 @@ const useStyle = makeStyles((theme) => ({
     paddingRight: "50px",
   },
   cardImage: {
+    transition:"all 1s ease",
     " &:hover": {
       cursor: "pointer",
-      transition: theme.transitions.create("fill", {
-        // This is the fade-out transition
-        duration: theme.transitions.duration.leavingScreen,
-        ease: "sharp",
-      }),
-      " & .background-image": {
-        // transform: `${scale(1.1)}`,
-        transition: theme.transitions.create("fill", {
-          duration: theme.transitions.duration.enteringScreen,
-          ease: "sharp",
-        }),
-      },
-      " & .content": {
-        opacity: 0.9,
-      },
+      transform:"scale(1.3)", 
+    
     },
   },
 }));
@@ -43,12 +31,12 @@ export default function DirectoryItem({ title, size, image, id, linkUrl }) {
 
   return (
     <div className={classes.root}>
-      <Card style={{ height: "500px" }}>
+      <Card style={{ height: "500px",margin:"auto",width:"100%" }}>
         <CardHeader title={<Typography variant="h6">{title}</Typography>} />
 
         <CardMedia
           image={image}
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: "100%", height:"100%" }}
           title={title}
           className={classes.cardImage}
         />
