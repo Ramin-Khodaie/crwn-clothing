@@ -1,12 +1,12 @@
 import { Typography, makeStyles } from "@material-ui/core";
-import Directory from "../components/Directory";
-import DirectoryItem from "../components/DirectoryItem";
+import Directory from "../components/Directorycomponent/Directory";
 
 const useStyle = makeStyles((theme) => ({
   root: {
-    paddingTop: "100px",
+    marginTop: "100px",
   },
 }));
+
 export default function Homepage() {
   const classes = useStyle();
   return (
