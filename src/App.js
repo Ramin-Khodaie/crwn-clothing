@@ -3,6 +3,8 @@ import Header from "./components/Header/Header";
 import About from "./pages/AboutPage";
 import Shop from "./pages/ShopPage";
 import SignInPage from "./pages/signInPage";
+import ProductDetail from "./pages/ProductDetail";
+import sections from "./components/Directorycomponent/Data";
 
 import { BrowserRouter, Route, Router, Switch } from "react-router-dom";
 export default function App() {
@@ -13,7 +15,7 @@ export default function App() {
         <Switch>
           <Route exact path="/">
             {" "}
-            <HomePage />{" "}
+            <HomePage data={sections}/>{" "}
           </Route>
           <Route path="/about">
             {" "}
@@ -25,6 +27,9 @@ export default function App() {
           </Route>
           <Route path="/signin">
             <SignInPage />
+          </Route>
+          <Route path="/products">
+            <ProductDetail title={sections[0].title}/>
           </Route>
         </Switch>
       </BrowserRouter>

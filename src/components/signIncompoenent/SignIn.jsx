@@ -12,7 +12,7 @@ import FacebookIcon from "../icons/facebookIcon";
 import { useState } from "react";
 const useStyle = makeStyles(() => ({
   root: {
-    marginLeft: "100px",
+    marginLeft: "75px",
     width: "80%",
     marginTop: "150px",
     
@@ -21,7 +21,8 @@ const useStyle = makeStyles(() => ({
   
     display: "flex",
     padding:"20px",
-    width:"380px"
+    width:"380px",
+    
 
   },
   signinbtn:{
@@ -46,26 +47,31 @@ export default function SignIn() {
   };
   return (
     <div className={classes.root}>
+      <fieldset  style={{height:"600px",borderRadius:5,color:"#0c0b09"}}>
       <legend style={{marginInline:7}}>
         <Typography variant="h6">Sing in </Typography>
-      <form>
-        <TextField type="email" label="Email" className={classes.inputText} />
+        </legend>
+      <form style={{marginLeft:"30px"}}>
+        <TextField type="email" label="Email" className={classes.inputText} color="secondary"/>
         <TextField
           type="passeord"
           label="Password"
           className={classes.inputText}
+          color="secondary"
         />
 
         <Checkbox
           checked={remember}
           onChange={handleChange}
           name="checkedB"
-          color="primary"
+          color="secondary"
           label="Remember me!"
+          style={{marginBottom:"0px"}}
         />
-        <span style={{ padding: "5px" }}>Remember Me!</span>
+        <span style={{ padding: "5px",marginTop:"50px" }}>Remember Me!</span>
        
-        <Button variant="outlined" color="inherit" startIcon={<MeetingRoomIcon/>} className={classes.signinbtn}>
+       <div style={{marginTop:"95px"}}>
+       <Button variant="outlined" color="inherit" startIcon={<MeetingRoomIcon/>} className={classes.signinbtn}>
        Sign in
       </Button>
     
@@ -75,8 +81,12 @@ export default function SignIn() {
       <Button variant="contained" color="inherit" startIcon={<FacebookIcon/>} className={classes.signinbtn}>
        Sign in with facebook account
       </Button>
+       </div>
+       
       </form>
-      </legend>
+    
+     
+      </fieldset>
      
     </div>
   );

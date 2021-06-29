@@ -4,7 +4,7 @@ import LockOpenSharpIcon from '@material-ui/icons/LockOpenSharp'
 
 const useStyle = makeStyles(() => ({
     root: {
-        marginRight: "200px",
+        margin: "auto",
         width: "80%",
         marginTop: "150px",
 
@@ -24,8 +24,8 @@ const useStyle = makeStyles(() => ({
         '&:hover': {
             backgroundColor: " black ",
             color: "white"
-        }
-
+        },
+        marginTop:"20px"
     }
 }));
 
@@ -34,17 +34,21 @@ export default function SignUp() {
     const classes = useStyle();
     return (
         <div className={classes.root}>
+            <fieldset style={{height:"600px",borderRadius:5,color:"#0c0b09"}}>
             <legend style={{ marginInline: 7 }}>
-                <Typography variant="h6">Sing in </Typography>
-                <form>
-                    <TextField label="Name" className={classes.inputText} />
-                    <TextField label="LastName" className={classes.inputText} />
-                    <TextField label="Username" className={classes.inputText} />
-                    <TextField label="Email" className={classes.inputText} type="email"/>
+                <Typography variant="h6">Sing up </Typography>
+
+            </legend>
+                <form style={{marginLeft:"30px"}}>
+                    <TextField label="Name" className={classes.inputText}  color="secondary"/>
+                    <TextField label="LastName" className={classes.inputText}  color="secondary"/>
+                    <TextField label="Username" className={classes.inputText}  color="secondary"/>
+                    <TextField label="Email" className={classes.inputText} type="email"  color="secondary"/>
                     <TextField
                         type="passeord"
                         label="Password"
                         className={classes.inputText}
+                        color="secondary"
                     />
 
 
@@ -55,8 +59,9 @@ export default function SignUp() {
 
                     
                 </form>
-            </legend>
-
+ 
+            </fieldset>
+ 
         </div>
     );
 }

@@ -8,20 +8,20 @@ const useStyle = makeStyles(() => ({
     paddingRight: "50px",
   },
 }));
-export default function Directory() {
+export default function Directory(props) {
   const classes = useStyle();
-
+  
   return (
     <div>
       <Grid container justify="center" spacing={4} className={classes.root}>
-        {sections.map((tile) => (
+        {props.data.map((d) => (
           <Grid item xs={12} sm={6} xl={4}>
             <DirectoryItem
-              image={tile.imageUrl}
-              title={tile.title}
-              size={tile.size}
-              id={tile.id}
-              linkUrl={tile.linkUrl}
+              image={d.imageUrl}
+              title={d.title}
+              size={d.size}
+              id={d.id}
+              linkUrl={d.linkUrl}
             />
           </Grid>
         ))}

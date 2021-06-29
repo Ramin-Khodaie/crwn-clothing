@@ -11,6 +11,7 @@ import {
   CardActionArea,
   CardMedia,
 } from "@material-ui/core";
+import { history, Link } from 'react-router-dom';
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -31,17 +32,26 @@ const useStyle = makeStyles((theme) => ({
 export default function DirectoryItem({ title, size, image, id, linkUrl }) {
   const classes = useStyle();
 
+
   return (
     <div className={classes.root}>
       <Card style={{ height: "500px%", margin: "auto", width: "100%" }}>
-        <CardHeader title={<Typography variant="h6">{title}</Typography>} />
 
-        <CardMedia
-          image={image}
-          style={{ width: "100%", height: "400px" }}
-          title={title}
-          className={classes.cardImage}
-        />
+        <CardActionArea >
+          <CardHeader title={<Typography variant="h6">{title}</Typography>} />
+
+
+          <Link to="/products">
+            <CardMedia
+              image={image}
+              style={{ width: "100%", height: "400px" }}
+              title={title}
+              className={classes.cardImage}
+            />
+          </Link>
+
+        </CardActionArea>
+
       </Card>
     </div>
   );

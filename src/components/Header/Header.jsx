@@ -8,7 +8,7 @@ import { Link as Mlink } from "@material-ui/core";
 import Shop from "../../pages/ShopPage";
 import { Link } from "react-router-dom";
 import { signInPage } from "../../pages/signInPage";
-
+import Sidbar from '../DrawerComponent/Sidbar'
 const useStyle = makeStyles(() => ({
   toolbar: {
     backgroundColor: "#EFEBE9",
@@ -19,15 +19,20 @@ const useStyle = makeStyles(() => ({
   },
   h6: {
     padding: "20px",
-    color: "black",
+    color: "#0c0b09 ",
+    
   },
   loginbtn: {
-    color: "red",
+    color: "#0c0b09",
     position: "absolute",
     marginRight: "15px",
     marginTop: "2px",
     right: "0",
     marginTop: "-18px",
+    '&:hover':{
+      backgroundColor:"#0c0b09",
+      color:"#EFEBE9"
+    }
   },
   Mlink: {},
 }));
@@ -52,10 +57,8 @@ export default function Header() {
     <div className={classes.root}>
       <HideOnScroll>
         <AppBar position="fixed">
-          <Toolbar className={classes.toolbar} variant="regular">
-            <IconButton aria-label="menu" edge="start">
-              <MenuIcon />
-            </IconButton>
+          <Toolbar className={classes.toolbar} variant="regular">           
+            {/* <Sidbar/> */}
             <div className={classes.h6}>
               <Mlink underline="none" href="/" color="inherit">
                 <Typography variant="h6">Home</Typography>
@@ -74,7 +77,7 @@ export default function Header() {
 
             <div>
               <Mlink href="/signIn">
-                <Button className={classes.loginbtn} variant="outlined">
+                <Button className={classes.loginbtn} variant="outlined" >
                   Login
                 </Button>
               </Mlink>

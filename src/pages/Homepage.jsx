@@ -7,11 +7,11 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function Homepage() {
+export default function Homepage(props) {
   const classes = useStyle();
   return (
     <div className={classes.root}>
-      <Directory />
+      <Directory data={props.data}/>
     </div>
   );
 }
