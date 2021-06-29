@@ -3,23 +3,23 @@ import SignIn from "../components/signIncompoenent/SignIn";
 import SignUp from "../components/SignupComponent/SignUp";
 const useStyle = makeStyles(() => ({
   root: {
-    marginTop: "100px",
+    marginTop: "50px",
   },
   signin: {
     margin: "auto",
-    justifyContent:"center"
+    justifyContent: "center",
   },
 }));
 export default function SignInPage() {
   const classes = useStyle();
   return (
     <div className={classes.root}>
-      <Grid container >
-        <Grid xl={12} sm={6} md={6} >
+      <Grid container>
+        <Grid xl={12} sm={6} md={6}>
           <SignIn />
         </Grid>
         <Grid xl={12} sm={6} md={6}>
-          <SignUp/>
+          <SignUp />
         </Grid>
       </Grid>
     </div>

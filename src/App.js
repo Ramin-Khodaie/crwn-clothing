@@ -1,9 +1,9 @@
+import "./App.css";
 import HomePage from "./pages/Homepage";
 import Header from "./components/Header/Header";
 import About from "./pages/AboutPage";
-import Shop from "./pages/ShopPage";
 import SignInPage from "./pages/signInPage";
-import ProductDetail from "./pages/ProductDetail";
+import Products from "./pages/Products";
 import sections from "./components/Directorycomponent/Data";
 
 import { BrowserRouter, Route, Router, Switch } from "react-router-dom";
@@ -15,21 +15,17 @@ export default function App() {
         <Switch>
           <Route exact path="/">
             {" "}
-            <HomePage data={sections}/>{" "}
+            <HomePage data={sections} />{" "}
           </Route>
           <Route path="/about">
             {" "}
             <About />{" "}
           </Route>
-          <Route path="/Shop">
-            {" "}
-            <Shop />
-          </Route>
           <Route path="/signin">
             <SignInPage />
           </Route>
-          <Route path="/products">
-            <ProductDetail title={sections[0].title}/>
+          <Route path="/products/:title">
+            <Products />
           </Route>
         </Switch>
       </BrowserRouter>

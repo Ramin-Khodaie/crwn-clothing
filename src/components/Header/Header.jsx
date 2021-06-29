@@ -6,9 +6,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { Typography } from "@material-ui/core";
 import { Link as Mlink } from "@material-ui/core";
 import Shop from "../../pages/ShopPage";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { signInPage } from "../../pages/signInPage";
-import Sidbar from '../DrawerComponent/Sidbar'
+import Sidbar from "../DrawerComponent/Sidbar";
+
 const useStyle = makeStyles(() => ({
   toolbar: {
     backgroundColor: "#EFEBE9",
@@ -20,7 +21,6 @@ const useStyle = makeStyles(() => ({
   h6: {
     padding: "20px",
     color: "#0c0b09 ",
-    
   },
   loginbtn: {
     color: "#0c0b09",
@@ -29,10 +29,10 @@ const useStyle = makeStyles(() => ({
     marginTop: "2px",
     right: "0",
     marginTop: "-18px",
-    '&:hover':{
-      backgroundColor:"#0c0b09",
-      color:"#EFEBE9"
-    }
+    "&:hover": {
+      backgroundColor: "#0c0b09",
+      color: "#EFEBE9",
+    },
   },
   Mlink: {},
 }));
@@ -51,14 +51,14 @@ function HideOnScroll(props) {
   );
 }
 
-export default function Header() {
+function Header(props) {
   const classes = useStyle();
   return (
     <div className={classes.root}>
       <HideOnScroll>
         <AppBar position="fixed">
-          <Toolbar className={classes.toolbar} variant="regular">           
-            {/* <Sidbar/> */}
+          <Toolbar className={classes.toolbar} variant="regular">
+            <Sidbar />
             <div className={classes.h6}>
               <Mlink underline="none" href="/" color="inherit">
                 <Typography variant="h6">Home</Typography>
@@ -66,7 +66,7 @@ export default function Header() {
             </div>
             <div className={classes.h6}>
               <Mlink href="/shop" color="inherit" underline="none">
-                <Typography variant="h6">Shop</Typography>
+                <Typography variant="h6">Products</Typography>
               </Mlink>
             </div>
             <div className={classes.h6}>
@@ -76,11 +76,13 @@ export default function Header() {
             </div>
 
             <div>
-              <Mlink href="/signIn">
-                <Button className={classes.loginbtn} variant="outlined" >
-                  Login
-                </Button>
-              </Mlink>
+              <Button
+                className={classes.loginbtn}
+                variant="outlined"
+                onClick={() => props.history.push("/signin")}
+              >
+                Login
+              </Button>
             </div>
           </Toolbar>
         </AppBar>
@@ -88,3 +90,5 @@ export default function Header() {
     </div>
   );
 }
+
+export default withRouter(Header);

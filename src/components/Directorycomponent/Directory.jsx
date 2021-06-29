@@ -10,19 +10,13 @@ const useStyle = makeStyles(() => ({
 }));
 export default function Directory(props) {
   const classes = useStyle();
-  
+  console.log(500, props);
   return (
     <div>
       <Grid container justify="center" spacing={4} className={classes.root}>
-        {props.data.map((d) => (
+        {props.data.map(({ id, ...otherProps }) => (
           <Grid item xs={12} sm={6} xl={4}>
-            <DirectoryItem
-              image={d.imageUrl}
-              title={d.title}
-              size={d.size}
-              id={d.id}
-              linkUrl={d.linkUrl}
-            />
+            <DirectoryItem key={id} {...otherProps} />
           </Grid>
         ))}
       </Grid>
