@@ -1,6 +1,6 @@
 import { Typography, makeStyles, Grid } from "@material-ui/core";
-import SignIn from "../components/signIncompoenent/SignIn";
-import SignUp from "../components/SignupComponent/SignUp";
+import SignIn from "../../components/signIncompoenent/SignIn";
+import SignUp from "../../components/SignupComponent/SignUp";
 const useStyle = makeStyles(() => ({
   root: {
     marginTop: "50px",

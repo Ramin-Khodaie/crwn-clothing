@@ -1,10 +1,10 @@
 import "./App.css";
-import HomePage from "./pages/Homepage";
+import HomePage from "./pages/Home/Homepage";
 import Header from "./components/Header/Header";
-import About from "./pages/AboutPage";
-import SignInPage from "./pages/signInPage";
-import Products from "./pages/Products";
-import sections from "./components/Directorycomponent/Data";
+import About from "./pages/About/AboutPage";
+import SignInPage from "./pages/signIn/signInPage";
+import Products from "./pages/Products/Products";
+import sections from "./Data/Data";
 
 import { BrowserRouter, Route, Router, Switch } from "react-router-dom";
 export default function App() {
@@ -24,7 +24,7 @@ export default function App() {
           <Route path="/signin">
             <SignInPage />
           </Route>
-          <Route path="/products/:title">
+          <Route path="/products">
             <Products />
           </Route>
         </Switch>

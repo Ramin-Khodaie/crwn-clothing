@@ -1,5 +1,5 @@
 import DirectoryItem from "./DirectoryItem";
-import sections from "./Data";
+import sections from "../../Data/shop_data";
 import { Grid, makeStyles } from "@material-ui/core";
 
 const useStyle = makeStyles(() => ({

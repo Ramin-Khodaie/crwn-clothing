@@ -5,9 +5,9 @@ import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Typography } from "@material-ui/core";
 import { Link as Mlink } from "@material-ui/core";
-import Shop from "../../pages/ShopPage";
+
 import { Link, withRouter } from "react-router-dom";
-import { signInPage } from "../../pages/signInPage";
+
 import Sidbar from "../DrawerComponent/Sidbar";
 
 const useStyle = makeStyles(() => ({
@@ -65,7 +65,7 @@ function Header(props) {
               </Mlink>
             </div>
             <div className={classes.h6}>
-              <Mlink href="/shop" color="inherit" underline="none">
+              <Mlink href="/products" color="inherit" underline="none">
                 <Typography variant="h6">Products</Typography>
               </Mlink>
             </div>
