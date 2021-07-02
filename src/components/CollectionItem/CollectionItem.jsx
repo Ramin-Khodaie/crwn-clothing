@@ -14,6 +14,14 @@ const useStyle = makeStyles(() => ({
     backgroundSize: "cover",
     backgroundPosition: "center",
     marginBottom: "5px",
+    transition: "all 1s ease",
+    " &:hover": {
+      cursor: "pointer",
+      //   transform: "scale(1.4)",
+      //   width: "100%",
+      //   height: "100%",
+      //   margin: "auto",
+    },
   },
   footer: {
     width: "100%",
