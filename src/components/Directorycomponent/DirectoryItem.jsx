@@ -42,7 +42,6 @@ const useStyle = makeStyles((theme) => ({
 function DirectoryItem({ title, id, history, imageUrl, match, linkUrl }) {
   const classes = useStyle();
 
-  console.log(400, title);
   return (
     <div>
       <Card

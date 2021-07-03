@@ -41,7 +41,7 @@ const useStyle = makeStyles(() => ({
 }));
 export default function CollectionItem(props) {
   const classes = useStyle();
-  console.log(100, props);
+
   return (
     <div className={classes.root}>
       <img className={classes.image} src={props.imageUrl} />

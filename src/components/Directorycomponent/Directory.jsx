@@ -10,7 +10,7 @@ const useStyle = makeStyles(() => ({
 }));
 export default function Directory(props) {
   const classes = useStyle();
-  console.log(500, props);
+
   return (
     <div>
       <Grid container justify="center" spacing={4} className={classes.root}>

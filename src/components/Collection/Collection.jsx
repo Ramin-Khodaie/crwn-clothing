@@ -13,7 +13,6 @@ const useStyle = makeStyles(() => ({
   },
 }));
 export default function Collection(props) {
-  console.log(200, props.items);
   const { title, items } = props;
   const classes = useStyle();
   return (
