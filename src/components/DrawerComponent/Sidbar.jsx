@@ -11,7 +11,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { IconButton } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import DrawerIcons from '../icons/DrawerIcons'
 import CrownIcon from "../icons/CrownIcon";
 const useStyles = makeStyles({
   list: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Sidbar() {
+export default function Sidbar({isloggedin,logout}) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -41,7 +41,7 @@ export default function Sidbar() {
 
     setState({ ...state, [anchor]: open });
   };
-
+  
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -52,10 +52,10 @@ export default function Sidbar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+        {["Home", "Products", "Shop"].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <DrawerIcons icon={text}/>
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
@@ -63,14 +63,17 @@ export default function Sidbar() {
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
+        {
+          
+          <ListItem button onClick={logout}>
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <DrawerIcons icon = {isloggedin ? "logout" : "login"}/>
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary = {isloggedin ? "Logout" : "Login"}/>
           </ListItem>
-        ))}
+
+        }
+        
       </List>
     </div>
   );
@@ -88,15 +91,7 @@ export default function Sidbar() {
         >
           {list("left")}
         </Drawer>
-      </>
-      {/* {['left', 'right', 'top', 'bottom'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))} */}
+      </>     
     </div>
   );
 }

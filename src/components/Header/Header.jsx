@@ -65,7 +65,7 @@ function Header({ isloggedin, history }) {
       <HideOnScroll>
         <AppBar position="fixed">
           <Toolbar className={classes.toolbar} variant="regular">
-            <Sidbar />
+            <Sidbar isloggedin logout={dologout}/>
             <div className={classes.h6}>
               <Mlink underline="none" href="/" color="inherit">
                 <Typography variant="h6">Home</Typography>
