@@ -87,7 +87,7 @@ function Header({ isloggedin, history }) {
                 <Button
                   className={classes.loginbtn}
                   variant="outlined"
-                  onClick={dologout()}
+                  onClick={()=>dologout()}
                 >
                   log out
                 </Button>

@@ -9,17 +9,33 @@ import sections from "./Data/Data";
 import { auth } from "./components/firebase-utils/firebase";
 
 import { BrowserRouter, Route, Router, Switch } from "react-router-dom";
-export default function App() {
-  const [state, setstate] = useState({ currentUser: null });
+import { Unsubscribe } from "@material-ui/icons";
+export default class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      currentUser:null
+    }
+  }
+//   const [state, setstate] = useState({ currentUser: null });
+// const handleCurrentUser=()=>{
+//   const user = auth.currentUser;
+//   setstate({currentUser:user})
+// }
+// console.log(350,state.currentUser)
 
-  const handleCurretUser = () => {
-    const user = auth.currentUser;
-    setstate({ currentUser: user });
-  };
+componentDidMount(){
+  auth.onAuthStateChanged((user)=>{
+    this.setState({currentUser:user})
+    console.log(450,user)
+  })
+}
+
+render(){
   return (
     <div className="App">
       <BrowserRouter>
-        <Header isloggedin={state.currentUser} />
+        <Header isloggedin={this.state.currentUser} />
         <Switch>
           <Route exact path="/">
             {" "}
@@ -39,4 +55,6 @@ export default function App() {
       </BrowserRouter>
     </div>
   );
+
 }
+  }
