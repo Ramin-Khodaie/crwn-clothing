@@ -6,7 +6,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { Typography } from "@material-ui/core";
 import { Link as Mlink } from "@material-ui/core";
 import { auth } from "../firebase-utils/firebase";
-
+import { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 
 import Sidbar from "../DrawerComponent/Sidbar";
@@ -54,9 +54,10 @@ function HideOnScroll(props) {
 
 function Header({ isloggedin, history }) {
   const classes = useStyle();
-
+  const [state, setstate] = useState({ loggedin: isloggedin });
   const dologout = () => {
     auth.signOut();
+    setstate({ loggedin: false });
     history.push("/signin");
   };
 
@@ -65,7 +66,7 @@ function Header({ isloggedin, history }) {
       <HideOnScroll>
         <AppBar position="fixed">
           <Toolbar className={classes.toolbar} variant="regular">
-            <Sidbar isloggedin logout={dologout}/>
+            <Sidbar islogin={state.loggedin} logout={dologout} />
             <div className={classes.h6}>
               <Mlink underline="none" href="/" color="inherit">
                 <Typography variant="h6">Home</Typography>
@@ -83,11 +84,11 @@ function Header({ isloggedin, history }) {
             </div>
 
             <div>
-              {isloggedin ? (
+              {isloggedin !== null ? (
                 <Button
                   className={classes.loginbtn}
                   variant="outlined"
-                  onClick={()=>dologout()}
+                  onClick={() => dologout()}
                 >
                   log out
                 </Button>

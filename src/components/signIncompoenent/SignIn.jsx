@@ -8,9 +8,14 @@ import {
 import GoogleIcon from "../icons/GoogleIcon";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import FacebookIcon from "../icons/facebookIcon";
-import { signinWithGoogle } from "../../components/firebase-utils/firebase";
+import {
+  auth,
+  createUserProfileDocument,
+  signinWithGoogle,
+} from "../../components/firebase-utils/firebase";
 
 import { useState } from "react";
+import { withRouter } from "react-router-dom";
 const useStyle = makeStyles(() => ({
   root: {
     marginLeft: "75px",
@@ -33,12 +38,37 @@ const useStyle = makeStyles(() => ({
     },
   },
 }));
-export default function SignIn() {
-  const [remember, setRemember] = useState(true);
+
+function SignIn({ history }) {
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+  });
   const classes = useStyle();
 
   const handleChange = (e) => {
-    setRemember(!remember);
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+    console.log(100, state);
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { email, password } = state;
+
+    try {
+      const { user } = await auth.signInWithEmailAndPassword(email, password);
+
+      await createUserProfileDocument(user);
+      alert("You logged in succsesfuly!");
+      history.push("/");
+      setState({
+        email: "",
+        password: "",
+      });
+    } catch (error) {
+      console.log(500, "error message:", error);
+    }
   };
   return (
     <div className={classes.root}>
@@ -46,31 +76,25 @@ export default function SignIn() {
         <legend style={{ marginInline: 7 }}>
           <Typography variant="h6">Sing in </Typography>
         </legend>
-        <form style={{ marginLeft: "30px" }}>
+        <form style={{ marginLeft: "30px" }} onSubmit={(e) => handleSubmit(e)}>
           <TextField
             type="email"
             label="Email"
+            name="email"
             className={classes.inputText}
             color="secondary"
+            value={state.email}
+            onChange={(e) => handleChange(e)}
           />
           <TextField
             type="passeord"
             label="Password"
+            name="password"
             className={classes.inputText}
             color="secondary"
+            value={state.password}
+            onChange={(e) => handleChange(e)}
           />
-
-          <Checkbox
-            checked={remember}
-            onChange={handleChange}
-            name="checkedB"
-            color="secondary"
-            label="Remember me!"
-            style={{ marginBottom: "0px" }}
-          />
-          <span style={{ padding: "5px", marginTop: "50px" }}>
-            Remember Me!
-          </span>
 
           <div style={{ marginTop: "95px" }}>
             <Button
@@ -78,6 +102,7 @@ export default function SignIn() {
               color="inherit"
               startIcon={<MeetingRoomIcon />}
               className={classes.signinbtn}
+              type="submit"
             >
               Sign in
             </Button>
@@ -105,3 +130,4 @@ export default function SignIn() {
     </div>
   );
 }
+export default withRouter(SignIn);
