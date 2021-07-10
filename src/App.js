@@ -45,25 +45,23 @@ export default class App extends React.Component {
     console.log(64674, this.state);
     return (
       <div className="App">
-        <BrowserRouter>
-          <Header isloggedin={this.state.currentUser} />
-          <Switch>
-            <Route exact path="/">
-              {" "}
-              <HomePage data={sections} />{" "}
-            </Route>
-            <Route path="/about">
-              {" "}
-              <About />{" "}
-            </Route>
-            <Route path="/signin">
-              <SignInPage />
-            </Route>
-            <Route path="/products">
-              <Products />
-            </Route>
-          </Switch>
-        </BrowserRouter>
+        <Header isloggedin={this.state.currentUser} />
+        <Switch>
+          <Route exact path="/">
+            {" "}
+            <HomePage data={sections} />{" "}
+          </Route>
+          <Route path="/about">
+            {" "}
+            <About />{" "}
+          </Route>
+          <Route path="/signin">
+            <SignInPage />
+          </Route>
+          <Route path="/products">
+            <Products />
+          </Route>
+        </Switch>
       </div>
     );
   }
