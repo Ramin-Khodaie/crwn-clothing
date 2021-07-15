@@ -1,24 +1,13 @@
-import { Typography, makeStyles } from "@material-ui/core";
 import CollectionItem from "../CollectionItem/CollectionItem";
 
-const useStyle = makeStyles(() => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: "30px",
-  },
-  preview: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-}));
+import "./collection.scss";
+
 export default function Collection(props) {
   const { title, items } = props;
-  const classes = useStyle();
   return (
-    <div style={{ marginTop: "50px" }} className={classes.root}>
-      <Typography variant="h5">{title}</Typography>
-      <div className={classes.preview}>
+    <div className="collectionpreview">
+      <h1 className="title">{title}</h1>
+      <div className="preview">
         {items
           .filter((item, idx) => idx < 4)
           .map(({ id, ...itemprops }) => (

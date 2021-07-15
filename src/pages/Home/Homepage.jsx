@@ -1,17 +1,10 @@
-import { Typography, makeStyles } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import Directory from "../../components/Directorycomponent/Directory";
+import Directory from "../../components/Directory/Directory";
+import "./Homepage.scss";
 
-const useStyle = makeStyles((theme) => ({
-  root: {
-    marginTop: "100px",
-  },
-}));
-
-export default function HomePage({ data, onChange }) {
-  const classes = useStyle();
+export default function HomePage({ data }) {
   return (
-    <div style={{ marginTop: "100px" }}>
+    <div className="homepage">
       <Directory data={data} />
     </div>
   );

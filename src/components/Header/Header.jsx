@@ -1,115 +1,43 @@
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import { makeStyles, Button, Slide, useScrollTrigger } from "@material-ui/core";
-import { IconButton } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import { Typography } from "@material-ui/core";
-import { Link as Mlink } from "@material-ui/core";
 import { auth } from "../firebase-utils/firebase";
 import { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { ReactComponent as Logo } from "../../assets/images/icon.svg";
+import "./header.scss";
 
-import Sidbar from "../DrawerComponent/Sidbar";
-
-const useStyle = makeStyles(() => ({
-  toolbar: {
-    backgroundColor: "#EFEBE9",
-  },
-  root: {
-    flexGrow: 1,
-    position: "relative",
-  },
-  h6: {
-    padding: "20px",
-    color: "#0c0b09 ",
-  },
-  loginbtn: {
-    color: "#0c0b09",
-    position: "absolute",
-    marginRight: "15px",
-    marginTop: "2px",
-    right: "0",
-    marginTop: "-18px",
-    "&:hover": {
-      backgroundColor: "#0c0b09",
-      color: "#EFEBE9",
-    },
-  },
-  Mlink: {},
-}));
-
-function HideOnScroll(props) {
-  const { children, window } = props;
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
-  const trigger = useScrollTrigger({ target: window ? window() : undefined });
-
-  return (
-    <Slide appear={false} direction="down" in={!trigger}>
-      {children}
-    </Slide>
-  );
-}
-
-function Header({ isloggedin, history }) {
-  const classes = useStyle();
-  const [state, setstate] = useState({ loggedin: isloggedin });
+function Header({ currentUser, history }) {
   const dologout = () => {
     auth.signOut();
-    setstate({ loggedin: false });
+    // setstate({ loggedin: false });
     history.push("/signin");
   };
-
   return (
-    <div className={classes.root}>
-      <HideOnScroll>
-        <AppBar position="fixed">
-          <Toolbar className={classes.toolbar} variant="regular">
-            <Sidbar islogin={state.loggedin} logout={dologout} />
-            <div className={classes.h6}>
-              <Mlink underline="none" href="/" color="inherit">
-                <Typography variant="h6">Home</Typography>
-              </Mlink>
-            </div>
-            <div className={classes.h6}>
-              <Mlink href="/products" color="inherit" underline="none">
-                <Typography variant="h6">Products</Typography>
-              </Mlink>
-            </div>
-            <div className={classes.h6}>
-              <Mlink underline="none" href="/about" color="inherit">
-                <Typography variant="h6">About</Typography>
-              </Mlink>
-            </div>
-
-            <div>
-              {isloggedin !== null ? (
-                <Button
-                  className={classes.loginbtn}
-                  variant="outlined"
-                  onClick={() => dologout()}
-                >
-                  log out
-                </Button>
-              ) : (
-                // <Mlink className={classes.loginbtn} onClick={auth.signOut()}>
-                //   Logout
-                // </Mlink>
-                <Button
-                  className={classes.loginbtn}
-                  variant="outlined"
-                  onClick={() => history.push("/signin")}
-                >
-                  Login
-                </Button>
-              )}
-            </div>
-          </Toolbar>
-        </AppBar>
-      </HideOnScroll>
+    <div className="header">
+      <Link className="logo-container" to="/">
+        <Logo className="logo" />
+      </Link>
+      <div className="options">
+        <Link className="option" to="/shop">
+          Shop
+        </Link>
+        <Link className="option" to="/shop">
+          Contact
+        </Link>
+        {currentUser ? (
+          <Link className="option" to="/signin">
+            Sign out
+          </Link>
+        ) : (
+          <Link className="option" to="/signin">
+            Sign in
+          </Link>
+        )}
+      </div>
     </div>
   );
 }
 
-export default withRouter(Header);
+const mapStatetoProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+export default withRouter(connect(mapStatetoProps)(Header));
