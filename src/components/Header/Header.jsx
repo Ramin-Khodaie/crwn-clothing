@@ -24,7 +24,7 @@ function Header({ currentUser, history }) {
           Contact
         </Link>
         {currentUser ? (
-          <Link className="option" to="/signin">
+          <Link className="option" to="/signin" onClick={dologout}>
             Sign out
           </Link>
         ) : (

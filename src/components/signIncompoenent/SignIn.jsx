@@ -1,55 +1,22 @@
-import { Typography, button, Button, IconButton } from "@material-ui/core";
-import {
-  makeStyles,
-  TextField,
-  Checkbox,
-  FormControlLabel,
-} from "@material-ui/core";
-import GoogleIcon from "../icons/GoogleIcon";
-import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
-import FacebookIcon from "../icons/facebookIcon";
 import {
   auth,
   createUserProfileDocument,
   signinWithGoogle,
 } from "../../components/firebase-utils/firebase";
-
 import { useState } from "react";
+import FormInput from "../Form-input/Form-input";
+import CustomButton from "../CustomButton/CustomButton";
 import { withRouter } from "react-router-dom";
-const useStyle = makeStyles(() => ({
-  root: {
-    marginLeft: "75px",
-    width: "80%",
-    marginTop: "150px",
-  },
-  inputText: {
-    display: "flex",
-    padding: "20px",
-    width: "380px",
-  },
-  signinbtn: {
-    display: "flex",
-    width: "400px",
-    padding: "20px",
-    margin: "10px",
-    "&:hover": {
-      backgroundColor: " black ",
-      color: "white",
-    },
-  },
-}));
 
-function SignIn({ history }) {
+import "./signin.scss";
+const SignIn = ({ history }) => {
   const [state, setState] = useState({
     email: "",
     password: "",
   });
-  const classes = useStyle();
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
-    console.log(100, state);
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -71,63 +38,36 @@ function SignIn({ history }) {
     }
   };
   return (
-    <div className={classes.root}>
-      <fieldset style={{ height: "600px", borderRadius: 5, color: "#0c0b09" }}>
-        <legend style={{ marginInline: 7 }}>
-          <Typography variant="h6">Sing in </Typography>
-        </legend>
-        <form style={{ marginLeft: "30px" }} onSubmit={(e) => handleSubmit(e)}>
-          <TextField
-            type="email"
-            label="Email"
-            name="email"
-            className={classes.inputText}
-            color="secondary"
-            value={state.email}
-            onChange={(e) => handleChange(e)}
-          />
-          <TextField
-            type="passeord"
-            label="Password"
-            name="password"
-            className={classes.inputText}
-            color="secondary"
-            value={state.password}
-            onChange={(e) => handleChange(e)}
-          />
+    <div className="signin">
+      <h1>I already have an account</h1>
+      <span>Sign in with your email and password</span>
 
-          <div style={{ marginTop: "95px" }}>
-            <Button
-              variant="outlined"
-              color="inherit"
-              startIcon={<MeetingRoomIcon />}
-              className={classes.signinbtn}
-              type="submit"
-            >
-              Sign in
-            </Button>
-
-            <Button
-              variant="contained"
-              color="inherit"
-              startIcon={<GoogleIcon />}
-              className={classes.signinbtn}
-              onClick={signinWithGoogle}
-            >
-              Sign in with google account
-            </Button>
-            <Button
-              variant="contained"
-              color="inherit"
-              startIcon={<FacebookIcon />}
-              className={classes.signinbtn}
-            >
-              Sign in with facebook account
-            </Button>
-          </div>
-        </form>
-      </fieldset>
+      <form onSubmit={handleSubmit}>
+        <FormInput
+          label="email"
+          name="email"
+          type="email"
+          handleChange={handleChange}
+          required
+          value={state.email}
+        />
+        <FormInput
+          label="password"
+          name="password"
+          type="password"
+          handleChange={handleChange}
+          required
+          value={state.password}
+        />
+        <div className="buttons">
+          <CustomButton type="submit">Sign in</CustomButton>
+          <CustomButton onClick={signinWithGoogle} isgooglesignin>
+            {" "}
+            Sign in with Google
+          </CustomButton>
+        </div>
+      </form>
     </div>
   );
-}
+};
 export default withRouter(SignIn);
