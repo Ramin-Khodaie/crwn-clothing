@@ -1,4 +1,6 @@
 import "./collectionitem.scss";
+import CustomButton from "../CustomButton/CustomButton";
+
 export default function CollectionItem({ imageUrl, name, price }) {
   return (
     <div className="collectionitem">
@@ -7,6 +9,7 @@ export default function CollectionItem({ imageUrl, name, price }) {
         <span className="name">{name}</span>
         <span className="price">${price}</span>
       </div>
+      <CustomButton inverted>Add to cart</CustomButton>
     </div>
   );
 }

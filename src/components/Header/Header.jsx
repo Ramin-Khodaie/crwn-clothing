@@ -4,8 +4,11 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { ReactComponent as Logo } from "../../assets/images/icon.svg";
 import "./header.scss";
+import CartIcon from "../CartIcon/CartIcon";
+import Cartdropdown from "../Cart-dropdown/Cart-dropdown";
 
-function Header({ currentUser, history }) {
+function Header({ currentUser, history, hidden }) {
+  //logging out from current account
   const dologout = () => {
     auth.signOut();
     // setstate({ loggedin: false });
@@ -32,12 +35,15 @@ function Header({ currentUser, history }) {
             Sign in
           </Link>
         )}
+        <CartIcon />
       </div>
+      {hidden && <Cartdropdown />}
     </div>
   );
 }
 
-const mapStatetoProps = (state) => ({
-  currentUser: state.user.currentUser,
+const mapStatetoProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden,
 });
 export default withRouter(connect(mapStatetoProps)(Header));
