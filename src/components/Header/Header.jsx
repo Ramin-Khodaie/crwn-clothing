@@ -6,6 +6,9 @@ import { ReactComponent as Logo } from "../../assets/images/icon.svg";
 import "./header.scss";
 import CartIcon from "../CartIcon/CartIcon";
 import Cartdropdown from "../Cart-dropdown/Cart-dropdown";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../redux/user/useSelectore";
+import { cartHidden } from "../../redux/cart/cartSelectore";
 
 function Header({ currentUser, history, hidden }) {
   //logging out from current account
@@ -42,8 +45,8 @@ function Header({ currentUser, history, hidden }) {
   );
 }
 
-const mapStatetoProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden,
+const mapStatetoProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: cartHidden,
 });
 export default withRouter(connect(mapStatetoProps)(Header));

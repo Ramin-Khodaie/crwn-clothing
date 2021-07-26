@@ -10,16 +10,20 @@
   top: 90px;
   right: 40px;
   z-index: 5;
-  opacity: 0.8;
+  overflow: scroll;
 
   .cart-item {
     height: 240px;
     display: flex;
-    flex-direction: column;
-    // overflow: scroll;
+    flex-direction: row;
   }
 
   .button {
     margin-top: auto;
+  }
+
+  .empty-cart {
+    font-size: 18px;
+    margin: 58px auto;
   }
 }
