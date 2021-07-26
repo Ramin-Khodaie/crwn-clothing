@@ -6,6 +6,7 @@
   padding: 15px 0;
   font-size: 20px;
   align-items: center;
+  font-weight: bold;
 
   .image-container {
     width: 23%;
@@ -27,6 +28,10 @@
 
     .arrow {
       cursor: pointer;
+      font-weight: bold;
+      &:hover {
+        color: lightcoral;
+      }
     }
     .value {
       margin: 0 10px;
@@ -36,6 +41,9 @@
   .remove-button {
     padding-left: 12px;
     cursor: pointer;
+    &:hover {
+      color: red;
+    }
   }
 
   .arrow {
