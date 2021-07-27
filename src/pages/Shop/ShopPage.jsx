@@ -1,14 +1,15 @@
-import { withRouter } from "react-router-dom";
-import shop_data from "../../Data/shop_data";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectShopItems } from "../../redux/shop/shopSelectore";
 import Collection from "../../components/Collection/Collection";
+import CollectionOverview from "../../components/ColectionOverview/CollectionOverview";
 
-function Products() {
+function Products({ collections }) {
   return (
     <div>
-      {shop_data.map(({ id, ...otherProps }) => (
-        <Collection key={id} {...otherProps} />
-      ))}
+      <CollectionOverview />
     </div>
   );
 }
-export default withRouter(Products);
+
+export default Products;

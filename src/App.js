@@ -5,7 +5,6 @@ import Header from "./components/Header/Header";
 import About from "./pages/About/AboutPage";
 import SignInPage from "./pages/signIn/signInPage";
 import ShopPage from "./pages/Shop/ShopPage";
-import sections from "./Data/Data";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { setCurrentUser } from "./redux/user/userAction";
@@ -52,7 +51,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/">
             {" "}
-            <HomePage data={sections} />{" "}
+            <HomePage />{" "}
           </Route>
           <Route path="/about">
             {" "}
