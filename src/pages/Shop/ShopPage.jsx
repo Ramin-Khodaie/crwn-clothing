@@ -3,13 +3,15 @@ import { createStructuredSelector } from "reselect";
 import { selectShopItems } from "../../redux/shop/shopSelectore";
 import Collection from "../../components/Collection/Collection";
 import CollectionOverview from "../../components/ColectionOverview/CollectionOverview";
-
-function Products({ collections }) {
+import { Route, withRouter } from "react-router-dom";
+import Category from "../Category/CategoryPage";
+function ShopPage({ match }) {
   return (
     <div>
-      <CollectionOverview />
+      <Route exact path={`${match.path}`} component={CollectionOverview} />
+      <Route path={`${match.path}/:category`} component={Category} />
     </div>
   );
 }
 
-export default Products;
+export default ShopPage;
