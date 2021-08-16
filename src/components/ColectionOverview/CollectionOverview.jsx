@@ -1,3 +1,7 @@
+/**
+ * This component takes an array of collection and pass it to Collection component to display them.
+ */
+
 import { connect } from "react-redux";
 import Collection from "../Collection/Collection";
 import { createStructuredSelector } from "reselect";

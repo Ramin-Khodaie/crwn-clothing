@@ -10,12 +10,12 @@ export const addItem = (item) => ({
   type: CartActionType.ADD_ITEM,
   payload: item,
 });
-
+//action which remove cartitem from current state.
 export const removeItemFromCart = (item) => ({
   type: CartActionType.REMOVE_ITEM_FROM_CART,
   payload: item,
 });
-
+//remove one item from current state
 export const removeOneItem = (item) => ({
   type: CartActionType.REMOVE_ONE_ITEM,
   payload: item,

@@ -25,6 +25,8 @@ import CheckoutPage from "./pages/Chechout/Checkoutpage";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
+
+  //
   componentDidMount() {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -59,7 +61,6 @@ class App extends React.Component {
               this.props.currentUser ? <Redirect to="/" /> : <SignInPage />
             }
           />
-
           <Route path="/shop" component={ShopPage} />
         </Switch>
       </div>
@@ -67,9 +68,12 @@ class App extends React.Component {
   }
 }
 
+//fetch current user from state
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
+
+//dispatches setCurrentUser action
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });

@@ -1,3 +1,7 @@
+/**
+ * This component display an Item
+ */
+
 import { Link, withRouter } from "react-router-dom";
 
 import "./directoryitem.scss";

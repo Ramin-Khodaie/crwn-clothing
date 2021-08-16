@@ -1,10 +1,12 @@
+/**
+ * Directory component which list directory items stored in directory state
+ */
+
 import DirectoryItem from "../DirectoryItem/DirectoryItem";
 import "./directory.scss";
 import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { selectDirectorySections } from "../../redux/directory/directorySelectore";
+
 const Directory = ({ sections }) => {
-  console.log(8000, sections);
   return (
     <div className="directory">
       {sections ? (
@@ -19,7 +21,7 @@ const Directory = ({ sections }) => {
     </div>
   );
 };
-
+//fetch sections from directory stored in state
 const mapStateToProps = (state) => ({
   sections: state.directory,
 });

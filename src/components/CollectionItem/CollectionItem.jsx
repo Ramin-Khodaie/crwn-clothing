@@ -1,3 +1,7 @@
+/**
+ * item will display here individualy
+ */
+
 import "./collectionitem.scss";
 import CustomButton from "../CustomButton/CustomButton";
 import { addItem } from "../../redux/cart/cartAction";
@@ -19,6 +23,10 @@ function CollectionItem({ item, addItem }) {
   );
 }
 
+/**
+ * action which add item to selected items in particular collection,here when you click ADD TO CART button,
+ * addItem function which is defiend in cartAction will be fired.
+ */
 const mapDispatchToProps = (dispatch) => ({
   addItem: (item) => dispatch(addItem(item)),
 });

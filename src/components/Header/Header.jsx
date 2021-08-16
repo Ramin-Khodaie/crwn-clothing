@@ -38,7 +38,7 @@ function Header({ currentUser, history, hidden }) {
             Sign in
           </Link>
         )}
-        <CartIcon />
+        {currentUser && <CartIcon />}
       </div>
       {hidden && <Cartdropdown />}
     </div>

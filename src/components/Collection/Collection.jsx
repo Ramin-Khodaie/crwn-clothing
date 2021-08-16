@@ -1,3 +1,7 @@
+/**
+ * collection component includes collectionItem and pass items related to specific collection .
+ */
+
 import { withRouter } from "react-router-dom";
 import CollectionItem from "../CollectionItem/CollectionItem";
 
