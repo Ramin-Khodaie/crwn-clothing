@@ -5,7 +5,11 @@ import Collection from "../../components/Collection/Collection";
 import CollectionOverview from "../../components/ColectionOverview/CollectionOverview";
 import { Route, withRouter } from "react-router-dom";
 import Category from "../Category/CategoryPage";
+import { firestore } from "../../components/firebase-utils/firebase";
 function ShopPage({ match }) {
+  // useEffect(() => {
+  //   const collectinRef = firestore.collection('collection');
+  // }, [input])
   return (
     <div>
       <Route exact path={`${match.path}`} component={CollectionOverview} />

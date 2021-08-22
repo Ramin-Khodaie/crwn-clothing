@@ -50,10 +50,15 @@ export const AddcollectionAndDocument = async (collectionkey, objectToAdd) => {
   const collectionRef = firestore.collection(collectionkey);
   const batch = firestore.batch();
 
-  objectToAdd.map((obj) => {
-    const newCollectionRef = collectionRef.doc();
-    batch.set(newCollectionRef, obj);
-  });
+  try {
+    objectToAdd.map((obj) => {
+      const newCollectionRef = collectionRef.doc();
+
+      batch.set(newCollectionRef, obj);
+    });
+  } catch (error) {
+    console.log("error entering data", error);
+  }
 
   return await batch.commit();
 };
