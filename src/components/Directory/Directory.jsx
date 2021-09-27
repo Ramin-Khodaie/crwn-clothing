@@ -5,12 +5,14 @@
 import DirectoryItem from "../DirectoryItem/DirectoryItem";
 import "./directory.scss";
 import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const Directory = ({ sections }) => {
+const Directory = () => {
+  const { products } = useSelector((state) => state.products);
   return (
     <div className="directory">
-      {sections ? (
-        sections.map(({ id, ...otherItems }) => (
+      {products ? (
+        products.map(({ id, ...otherItems }) => (
           <DirectoryItem key={id} {...otherItems} />
         ))
       ) : (
@@ -22,8 +24,8 @@ const Directory = ({ sections }) => {
   );
 };
 //fetch sections from directory stored in state
-const mapStateToProps = (state) => ({
-  sections: state.directory,
-});
+// const mapStateToProps = (state) => ({
+//   sections: state.directory,
+// });
 
-export default connect(mapStateToProps)(Directory);
+export default Directory;

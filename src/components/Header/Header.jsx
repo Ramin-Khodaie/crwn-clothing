@@ -45,8 +45,8 @@ function Header({ currentUser, history, hidden }) {
   );
 }
 
-const mapStatetoProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  hidden: cartHidden,
-});
-export default withRouter(connect(mapStatetoProps)(Header));
+// const mapStatetoProps = createStructuredSelector({
+//   currentUser: selectCurrentUser,
+//   hidden: cartHidden,
+// });
+export default withRouter(Header);

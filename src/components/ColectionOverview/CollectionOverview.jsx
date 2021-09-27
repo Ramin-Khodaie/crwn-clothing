@@ -2,16 +2,28 @@
  * This component takes an array of collection and pass it to Collection component to display them.
  */
 
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import Collection from "../Collection/Collection";
 import { createStructuredSelector } from "reselect";
 import { selectShopItems } from "../../redux/shop/shopSelectore";
 
-const CollectionOverview = ({ collections }) => {
+import { fetchCollection } from "../../redux/collection/collectionAction";
+import { useEffect } from "react";
+import collections from "../../Data/shop_data";
+import { withRouter } from "react-router";
+
+const CollectionOverview = (props) => {
+  const dispatch = useDispatch();
+  const { collection } = useSelector((state) => state.collection);
+  useEffect(() => {
+    dispatch(fetchCollection(collections));
+  }, []);
+
+  console.log(555, collection);
   return (
     <div>
-      {collections ? (
-        collections.map(({ id, ...otherProps }) => (
+      {collection ? (
+        collection.map(({ id, ...otherProps }) => (
           <Collection key={id} {...otherProps} />
         ))
       ) : (
@@ -23,7 +35,7 @@ const CollectionOverview = ({ collections }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  collections: state.shop.collections,
-});
-export default connect(mapStateToProps)(CollectionOverview);
+// const mapStateToProps = (state) => ({
+//   collections: state.shop.collections,
+// });
+export default withRouter(CollectionOverview);

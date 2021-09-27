@@ -10,6 +10,7 @@ function ShopPage({ match }) {
   // useEffect(() => {
   //   const collectinRef = firestore.collection('collection');
   // }, [input])
+  console.log(777, match);
   return (
     <div>
       <Route exact path={`${match.path}`} component={CollectionOverview} />

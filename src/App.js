@@ -5,7 +5,7 @@ import Header from "./components/Header/Header";
 import About from "./pages/About/AboutPage";
 import SignInPage from "./pages/signIn/signInPage";
 import ShopPage from "./pages/Shop/ShopPage";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { setCurrentUser } from "./redux/user/userAction";
 import {
@@ -24,28 +24,30 @@ import {
 import { selectCurrentUser } from "./redux/user/useSelectore";
 import { selectShopItems } from "./redux/shop/shopSelectore";
 import CheckoutPage from "./pages/Chechout/Checkoutpage";
+import { fecthProducts } from "./redux/shop/productAction";
+import products from "./Data/Data";
 
 const App = ({ currentUser, setCurrentUser, collection }) => {
   let unsubscribeFromAuth = null;
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    console.log(4500, "mounting...");
-    unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot((snapshot) => {
-          setCurrentUser({
-            id: snapshot.id,
-            ...snapshot.data(),
-          });
-        });
-      }
-      setCurrentUser(userAuth);
-      AddcollectionAndDocument(
-        "collections",
-        collection.map(({ title, items }) => ({ title, items }))
-      );
-    });
+    // unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
+    //     userRef.onSnapshot((snapshot) => {
+    //       setCurrentUser({
+    //         id: snapshot.id,
+    //         ...snapshot.data(),
+    //       });
+    //     });
+    //   }
+    //   setCurrentUser(userAuth);
+    //   AddcollectionAndDocument(
+    //     "collections",
+    //     collection.map(({ title, items }) => ({ title, items }))
+    //   );
+    // });
+    dispatch(fecthProducts(products));
   }, []);
   return (
     <div className="App">
@@ -65,15 +67,15 @@ const App = ({ currentUser, setCurrentUser, collection }) => {
   );
 };
 
-//fetch current user from state
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  collection: selectShopItems,
-});
+// //fetch current user from state
+// const mapStateToProps = createStructuredSelector({
+//   currentUser: selectCurrentUser,
+//   collection: selectShopItems,
+// });
 
 //dispatches setCurrentUser action
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
