@@ -7,6 +7,8 @@ import { useState } from "react";
 import FormInput from "../Form-input/Form-input";
 import CustomButton from "../CustomButton/CustomButton";
 import { withRouter } from "react-router-dom";
+import { doLogin } from "../../redux/user/userAction";
+import { useDispatch,useSelector } from "react-redux";
 
 import "./signin.scss";
 const SignIn = ({ history }) => {
@@ -14,6 +16,10 @@ const SignIn = ({ history }) => {
     email: "",
     password: "",
   });
+
+  const dispatch = useDispatch();
+  const {status,currentUser,error} = useSelector(state=>state.currentUser)
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
@@ -21,21 +27,33 @@ const SignIn = ({ history }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { email, password } = state;
-
-    try {
-      const { user } = await auth.signInWithEmailAndPassword(email, password);
-
-      await createUserProfileDocument(user);
-      alert("You logged in succsesfuly!");
-      history.push("/");
-      setState({
-        email: "",
-        password: "",
-      });
-    } catch (error) {
-      console.log(500, "error message:", error);
-    }
+    const {email,password} = state;
+    const data = {email,password}
+    // try {
+      //   const { user } = await auth.signInWithEmailAndPassword(email, password);
+      
+      //   await createUserProfileDocument(user);
+      //   alert("You logged in succsesfuly!");
+      //   history.push("/");
+      //   setState({
+        //     email: "",
+        //     password: "",
+    //   });
+    // } catch (error) {
+      //   console.log(500, "error message:", error);
+      // }
+      const res = await dispatch(doLogin(data));
+      console.log(750,res.payload)
+      if(res.payload.status === "success"){
+        history.push("/");
+        setState({
+          email:"",
+          password:""
+        })
+      }
+      if(res.payload.status === "error"){
+        alert(res.payload.message)
+      }
   };
   return (
     <div className="signin">
@@ -60,7 +78,7 @@ const SignIn = ({ history }) => {
           value={state.password}
         />
         <div className="buttons">
-          <CustomButton type="submit">Sign in</CustomButton>
+          <CustomButton type="submit" onClick={handleSubmit}>Sign in</CustomButton>
           <CustomButton onClick={signinWithGoogle} isgooglesignin>
             {" "}
             Sign in with Google

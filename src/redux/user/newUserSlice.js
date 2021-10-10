@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoading: false,
-  newUser: "",
+  message: "",
   error: "",
 };
 
@@ -15,7 +15,7 @@ const userSlice = createSlice({
     },
     createUserSuccess: (state, { payload }) => {
       state.isLoading = false;
-      state.newUser = payload;
+      state.message = payload;
     },
     createUserFail: (state, { payload }) => {
       state.isLoading = false;

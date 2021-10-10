@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoading: false,
+  status:"",
   currentUser: "",
   error: "",
 };
@@ -15,11 +16,14 @@ const userSlice = createSlice({
     },
     fetchUserSuccess: (state, { payload }) => {
       state.isLoading = false;
-      state.currentUser = payload;
+      state.status = payload.status;
+      state.currentUser=payload.userinfo;
+      state.error = ""
     },
     fetchUserFail: (state, { payload }) => {
       state.isLoading = false;
-      state.error = payload;
+      state.status = payload.status
+      state.error = payload.message;
     },
   },
 });

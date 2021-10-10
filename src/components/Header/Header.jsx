@@ -1,7 +1,7 @@
 import { auth } from "../firebase-utils/firebase";
 import { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { ReactComponent as Logo } from "../../assets/images/icon.svg";
 import "./header.scss";
 import CartIcon from "../CartIcon/CartIcon";
@@ -10,7 +10,8 @@ import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/useSelectore";
 import { cartHidden } from "../../redux/cart/cartSelectore";
 
-function Header({ currentUser, history, hidden }) {
+function Header({ history, hidden }) {
+  const {message,currentUser} = useSelector(state=>state.currentUser)
   //logging out from current account
   const dologout = () => {
     auth.signOut();
@@ -38,7 +39,7 @@ function Header({ currentUser, history, hidden }) {
             Sign in
           </Link>
         )}
-        {currentUser && <CartIcon />}
+        {/* {currentUser && <CartIcon />} */}
       </div>
       {hidden && <Cartdropdown />}
     </div>

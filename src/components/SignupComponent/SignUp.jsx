@@ -2,6 +2,8 @@ import { useState } from "react";
 import { withRouter } from "react-router-dom";
 import CustomButton from "../CustomButton/CustomButton";
 import { auth, createUserProfileDocument } from "../firebase-utils/firebase";
+import { useDispatch, useSelector} from "react-redux";
+import { newUser } from "../../redux/user/userAction";
 
 import FormInput from "../Form-input/Form-input";
 function SignUp({ history }) {
@@ -11,39 +13,37 @@ function SignUp({ history }) {
     password: "",
     confirmPassword: "",
   });
+const dispatch = useDispatch();
+// const {message, error} = useSelector(state=>state.user)
+
 
   const handleChange = (e) => {
-    console.log(540, e.target.name);
     const { name, value } = e.target;
-
     setState({ ...state, [name]: value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { name, email, password, confirmPassword } = state;
-
-    if (password !== confirmPassword) {
-      alert("password is not match!");
+    // const { name, email, password, confirmPassword } = state;
+    const user = {
+      name: state.name,
+      email: state.email,
+      password: state.password,
+      confirmPassword: state.confirmPassword,
+    };
+    if (state.password !== state.confirmPassword) {
+      alert('password dosent match.')
     }
-
     try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      await createUserProfileDocument(user, { name });
-      alert("You logged in succsesfuly!");
-      history.push("/");
+      dispatch(newUser(user))
+      alert("success");
       setState({
-        name: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
+        name:"",
+        email:"",
+        password:"",
+        confirmPassword:""
+      })
     } catch (error) {
       console.log(500, "error message:", error);
     }
@@ -86,7 +86,7 @@ function SignUp({ history }) {
       />
 
       <div>
-        <CustomButton type="submit">Sing up </CustomButton>
+        <CustomButton type="submit" onClick={handleSubmit}>Sing up </CustomButton>
       </div>
     </div>
   );
