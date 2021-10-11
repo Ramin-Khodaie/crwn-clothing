@@ -7,12 +7,6 @@ import SignInPage from "./pages/signIn/signInPage";
 import ShopPage from "./pages/Shop/ShopPage";
 import { connect, useDispatch } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { setCurrentUser } from "./redux/user/userAction";
-import {
-  auth,
-  createUserProfileDocument,
-  AddcollectionAndDocument,
-} from "./components/firebase-utils/firebase";
 
 import {
   BrowserRouter,
@@ -27,26 +21,10 @@ import CheckoutPage from "./pages/Chechout/Checkoutpage";
 import { fecthProducts } from "./redux/shop/productAction";
 import products from "./Data/Data";
 
-const App = ({ currentUser, setCurrentUser, collection }) => {
-  let unsubscribeFromAuth = null;
+const App = ({ currentUser }) => {
+  
   const dispatch = useDispatch();
   useEffect(() => {
-    // unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth);
-    //     userRef.onSnapshot((snapshot) => {
-    //       setCurrentUser({
-    //         id: snapshot.id,
-    //         ...snapshot.data(),
-    //       });
-    //     });
-    //   }
-    //   setCurrentUser(userAuth);
-    //   AddcollectionAndDocument(
-    //     "collections",
-    //     collection.map(({ title, items }) => ({ title, items }))
-    //   );
-    // });
     dispatch(fecthProducts(products));
   }, []);
   return (
@@ -66,16 +44,5 @@ const App = ({ currentUser, setCurrentUser, collection }) => {
     </div>
   );
 };
-
-// //fetch current user from state
-// const mapStateToProps = createStructuredSelector({
-//   currentUser: selectCurrentUser,
-//   collection: selectShopItems,
-// });
-
-//dispatches setCurrentUser action
-// const mapDispatchToProps = (dispatch) => ({
-//   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-// });
 
 export default App;
