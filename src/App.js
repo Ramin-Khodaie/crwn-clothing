@@ -5,8 +5,8 @@ import Header from "./components/Header/Header";
 import About from "./pages/About/AboutPage";
 import SignInPage from "./pages/signIn/signInPage";
 import ShopPage from "./pages/Shop/ShopPage";
-import { connect, useDispatch } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import {useDispatch } from "react-redux";
+import { addAllProductstoMongo } from "./redux/shop/productAction";
 
 import {
   BrowserRouter,
@@ -19,13 +19,16 @@ import { selectCurrentUser } from "./redux/user/useSelectore";
 import { selectShopItems } from "./redux/shop/shopSelectore";
 import CheckoutPage from "./pages/Chechout/Checkoutpage";
 import { fecthProducts } from "./redux/shop/productAction";
-import products from "./Data/Data";
+// import products from "./Data/Data";
+import newData from './Data/newdata';
 
 const App = ({ currentUser }) => {
   
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fecthProducts(products));
+    // dispatch(fecthProducts(products));
+    dispatch(fecthProducts())
+    
   }, []);
   return (
     <div className="App">

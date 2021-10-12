@@ -1,8 +1,9 @@
-const SHOP_DATA = [
+const Production = [
     {
       id: 1,
       title: "Hats",
       routeName: "hats",
+      linkUrl: "shop/hats",
       imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
       items: [
         {
@@ -66,6 +67,7 @@ const SHOP_DATA = [
       title: "Sneakers",
       imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
       routeName: "sneakers",
+      linkUrl: "shop/sneakers",      
       items: [
         {
           id: 10,
@@ -122,6 +124,7 @@ const SHOP_DATA = [
       title: "Jackets",
       imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
       routeName: "jackets",
+      linkUrl: "shop/jackets",
       items: [
         {
           id: 18,
@@ -160,6 +163,7 @@ const SHOP_DATA = [
       title: "Womens",
       imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
       routeName: "womens",
+      linkUrl: "shop/womens",
       items: [
         {
           id: 23,
@@ -210,6 +214,7 @@ const SHOP_DATA = [
       title: "Mens",
       imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
       routeName: "mens",
+      linkUrl: "shop/mens",
       items: [
         {
           id: 30,
@@ -251,5 +256,5 @@ const SHOP_DATA = [
     },
   ];
   
-  export default SHOP_DATA;
+  export default Production;
   

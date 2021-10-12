@@ -32,7 +32,7 @@ const collectionSlice = createSlice({
     selectedCategoryFail: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
-    },
+    },      
   },
 });
 
