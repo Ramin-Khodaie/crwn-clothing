@@ -1,10 +1,10 @@
 import "./Checkout.scss";
 
-import {
-  addItem,
-  removeItemFromCart,
-  removeOneItem,
-} from "../../redux/cart/cartAction";
+// import {
+//   addItem,
+//   removeItemFromCart,
+//   removeOneItem,
+// } from "../../redux/cart/cartAction";
 import { connect } from "react-redux";
 const Checkout = ({ cartItem, removeItem, addOneItem, removeOneItem }) => {
   const { name, imageUrl, quantity, price } = cartItem;
@@ -31,9 +31,9 @@ const Checkout = ({ cartItem, removeItem, addOneItem, removeOneItem }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  removeItem: (item) => dispatch(removeItemFromCart(item)),
-  addOneItem: (item) => dispatch(addItem(item)),
-  removeOneItem: (item) => dispatch(removeOneItem(item)),
-});
-export default connect(null, mapDispatchToProps)(Checkout);
+// const mapDispatchToProps = (dispatch) => ({
+//   removeItem: (item) => dispatch(removeItemFromCart(item)),
+//   addOneItem: (item) => dispatch(addItem(item)),
+//   removeOneItem: (item) => dispatch(removeOneItem(item)),
+// });
+export default (Checkout);

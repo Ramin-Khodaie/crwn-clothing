@@ -5,6 +5,7 @@ import {
   createUserSuccess,
   createUserFail,
 } from "./newUserSlice";
+import { loginsuccess } from "../login/loginSlice";
 export const setCurrentUser = (user) => ({
   type: "SET_CURRENT_USER",
   payload: user,
@@ -17,11 +18,14 @@ export const doLogin = (data) => async (dispatch) => {
     const result = await userLogin(data);
     console.log(400, result);
     if (result.status === "success") {
+      sessionStorage.setItem("at",result.accessToken);
+      localStorage.setItem("rt",result.refreshToken);
+      dispatch(loginsuccess())
       return dispatch(fetchUserSuccess(result));
     }
-    return dispatch(fetchUserFail(result));
+    // return dispatch(fetchUserFail(result));
   } catch (error) {
-    dispatch(fetchUserFail());
+    dispatch(fetchUserFail(error));
   }
 };
 

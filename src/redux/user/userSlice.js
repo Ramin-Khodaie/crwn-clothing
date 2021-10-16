@@ -19,6 +19,7 @@ const userSlice = createSlice({
       state.status = payload.status;
       state.currentUser=payload.userinfo;
       state.error = ""
+      
     },
     fetchUserFail: (state, { payload }) => {
       state.isLoading = false;

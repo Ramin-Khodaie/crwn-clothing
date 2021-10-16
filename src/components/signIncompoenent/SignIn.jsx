@@ -29,21 +29,9 @@ const SignIn = ({ history }) => {
 
     const {email,password} = state;
     const data = {email,password}
-    // try {
-      //   const { user } = await auth.signInWithEmailAndPassword(email, password);
+    
+    const res = await dispatch(doLogin(data));
       
-      //   await createUserProfileDocument(user);
-      //   alert("You logged in succsesfuly!");
-      //   history.push("/");
-      //   setState({
-        //     email: "",
-        //     password: "",
-    //   });
-    // } catch (error) {
-      //   console.log(500, "error message:", error);
-      // }
-      const res = await dispatch(doLogin(data));
-      console.log(750,res.payload)
       if(res.payload.status === "success"){
         history.push("/");
         setState({

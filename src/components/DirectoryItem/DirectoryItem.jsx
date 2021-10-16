@@ -5,12 +5,12 @@
 import { Link, withRouter } from "react-router-dom";
 
 import "./directoryitem.scss";
-function DirectoryItem({ title, id, history, imageUrl, match, linkUrl, size }) {
-  console.log(222,match.url,linkUrl)
+function DirectoryItem({ title, _id, history, imageUrl, match, linkUrl, size }) {
+  console.log(222,match)
   return (
     <div
       className={`${size} directory-item`}
-      onClick={() => history.push(`${match.url}${linkUrl}`)}
+      onClick={() => history.push(`${match.url}shop/${_id}`)}
     >
       <div
         className="background-image"

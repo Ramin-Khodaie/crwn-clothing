@@ -6,12 +6,11 @@ import { ReactComponent as Logo } from "../../assets/images/icon.svg";
 import "./header.scss";
 import CartIcon from "../CartIcon/CartIcon";
 import Cartdropdown from "../Cart-dropdown/Cart-dropdown";
-import { createStructuredSelector } from "reselect";
-import { selectCurrentUser } from "../../redux/user/useSelectore";
-import { cartHidden } from "../../redux/cart/cartSelectore";
 
-function Header({ history, hidden }) {
-  const {message,currentUser} = useSelector(state=>state.currentUser)
+
+function Header({ history }) {
+  const {message,currentUser} = useSelector(state=>state.currentUser);
+  // const {hidden} = useSelector(state=>state.cartitem);
   //logging out from current account
   const dologout = () => {
     auth.signOut();
@@ -39,9 +38,9 @@ function Header({ history, hidden }) {
             Sign in
           </Link>
         )}
-        {/* {currentUser && <CartIcon />} */}
+        {currentUser && <CartIcon />}
       </div>
-      {hidden && <Cartdropdown />}
+      {/* {hidden && <Cartdropdown />} */}
     </div>
   );
 }

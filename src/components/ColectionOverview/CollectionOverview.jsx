@@ -9,14 +9,15 @@ import { selectShopItems } from "../../redux/shop/shopSelectore";
 
 import { fetchCollection } from "../../redux/collection/collectionAction";
 import { useEffect } from "react";
-import collections from "../../Data/shop_data";
+
 import { withRouter } from "react-router";
 
 const CollectionOverview = (props) => {
   const dispatch = useDispatch();
   const { collection } = useSelector((state) => state.collection);
   useEffect(() => {
-    dispatch(fetchCollection(collections));
+    console.log(1009,collection)
+    dispatch(fetchCollection(collection));
   }, []);
 
   console.log(555, collection);

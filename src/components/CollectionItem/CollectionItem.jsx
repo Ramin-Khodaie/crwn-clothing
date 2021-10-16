@@ -27,7 +27,7 @@ function CollectionItem({ item, addItem }) {
  * action which add item to selected items in particular collection,here when you click ADD TO CART button,
  * addItem function which is defiend in cartAction will be fired.
  */
-const mapDispatchToProps = (dispatch) => ({
-  addItem: (item) => dispatch(addItem(item)),
-});
-export default connect(null, mapDispatchToProps)(CollectionItem);
+// const mapDispatchToProps = (dispatch) => ({
+//   addItem: (item) => dispatch(addItem(item)),
+// });
+export default (CollectionItem);

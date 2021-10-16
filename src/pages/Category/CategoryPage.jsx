@@ -8,8 +8,9 @@ const Category = ({ match }) => {
   const dispatch = useDispatch();
   const { selectedCategory } = useSelector((state) => state.collection);
 
+  console.log(3004,match.params)
   useEffect(() => {
-    dispatch(selectCategory(match.params.category));
+    dispatch(selectCategory(match.params._id));
   }, []);
 
 
