@@ -31,7 +31,7 @@ const SignIn = ({ history }) => {
     const data = {email,password}
     
     const res = await dispatch(doLogin(data));
-      
+      console.log(555,res)
       if(res.payload.status === "success"){
         history.push("/");
         setState({

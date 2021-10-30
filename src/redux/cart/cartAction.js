@@ -1,9 +1,8 @@
 import CartActionType from "./cartTypes";
-import { togglehidden } from "./cartSlice";
+import { togglehidden, cartItems } from "./cartSlice";
 
 //action which toggle cart to show
-export const handleChangeHidden = () => dispatch=> {
-  console.log(555,"jfaskdfj;")
+export const handleChangeHidden = () => (dispatch) => {
   dispatch(togglehidden());
 };
 
@@ -23,3 +22,24 @@ export const handleChangeHidden = () => dispatch=> {
 //   payload: item,
 // });
 
+export const addItem = (items, itemToAdd) => (dispatch) => {
+  const exsiting = items.find((item) => item.id === itemToAdd.id);
+
+  if (exsiting) {
+    items.map((item) => {
+      if (item.id === itemToAdd.id) {
+        console.log(6666, item);
+        return dispatch(cartItems({ ...item, quantity: item.quantity + 1 }));
+      } else {
+        return dispatch(cartItems(item));
+      }
+    });
+  }
+
+  console.log(222, itemToAdd, exsiting);
+  return dispatch(cartItems([...items, { ...itemToAdd, quantity: 1 }]));
+};
+
+// export const accomulateCartItems = cartItem =>dispatch=>{
+//  dispatch(cartItems( cartItem.reduce((acc,item)=>acc + item.quantity,0)))
+// }

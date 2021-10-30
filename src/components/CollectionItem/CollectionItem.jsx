@@ -4,11 +4,18 @@
 
 import "./collectionitem.scss";
 import CustomButton from "../CustomButton/CustomButton";
+import { connect, useSelector,useDispatch } from "react-redux";
 import { addItem } from "../../redux/cart/cartAction";
-import { connect } from "react-redux";
+import { cartItems } from "../../redux/cart/cartSlice";
 
-function CollectionItem({ item, addItem }) {
+function CollectionItem({ item }) {
+  const dispatch = useDispatch();
   const { imageUrl, name, price } = item;
+  const {cartItem} = useSelector(state=>state.cartitem)
+
+  const addCartItemToCart = async (cartItem,item)=>{
+   await dispatch(cartItems(cartItem,item))
+  }
   return (
     <div className="collectionitem">
       <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
@@ -16,7 +23,7 @@ function CollectionItem({ item, addItem }) {
         <span className="name">{name}</span>
         <span className="price">${price}</span>
       </div>
-      <CustomButton inverted onClick={() => addItem(item)}>
+      <CustomButton inverted onClick={()=>addCartItemToCart(cartItem,item)}>
         Add to cart
       </CustomButton>
     </div>

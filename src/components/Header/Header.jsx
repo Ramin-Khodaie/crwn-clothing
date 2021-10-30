@@ -10,7 +10,8 @@ import Cartdropdown from "../Cart-dropdown/Cart-dropdown";
 
 function Header({ history }) {
   const {message,currentUser} = useSelector(state=>state.currentUser);
-  // const {hidden} = useSelector(state=>state.cartitem);
+  
+  const {hidden,cartItem} = useSelector(state=>state.cartitem);
   //logging out from current account
   const dologout = () => {
     auth.signOut();
@@ -38,9 +39,9 @@ function Header({ history }) {
             Sign in
           </Link>
         )}
-        {currentUser && <CartIcon />}
+        {!currentUser && <CartIcon itemCount={cartItem && cartItem.length}/>}
       </div>
-      {/* {hidden && <Cartdropdown />} */}
+      {hidden && <Cartdropdown />}
     </div>
   );
 }

@@ -16,8 +16,8 @@ export const doLogin = (data) => async (dispatch) => {
 
   try {
     const result = await userLogin(data);
-    console.log(400, result);
     if (result.status === "success") {
+      console.log(400, result);
       sessionStorage.setItem("at",result.accessToken);
       localStorage.setItem("rt",result.refreshToken);
       dispatch(loginsuccess())
