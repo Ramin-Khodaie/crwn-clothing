@@ -15,12 +15,9 @@ import {
   Router,
   Switch,
 } from "react-router-dom";
-import { selectCurrentUser } from "./redux/user/useSelectore";
-import { selectShopItems } from "./redux/shop/shopSelectore";
 import CheckoutPage from "./pages/Chechout/Checkoutpage";
 import { fecthProducts } from "./redux/shop/productAction";
-// import products from "./Data/Data";
-import newData from './Data/newdata';
+
 
 const App = ({ currentUser }) => {
   

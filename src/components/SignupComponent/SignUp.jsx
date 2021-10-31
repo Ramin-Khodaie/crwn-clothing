@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { withRouter } from "react-router-dom";
 import CustomButton from "../CustomButton/CustomButton";
-import { auth, createUserProfileDocument } from "../firebase-utils/firebase";
 import { useDispatch, useSelector} from "react-redux";
 import { newUser } from "../../redux/user/userAction";
 

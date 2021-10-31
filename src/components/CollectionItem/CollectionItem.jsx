@@ -5,7 +5,7 @@
 import "./collectionitem.scss";
 import CustomButton from "../CustomButton/CustomButton";
 import { connect, useSelector,useDispatch } from "react-redux";
-import { addItem } from "../../redux/cart/cartAction";
+import { accomulateCartItems, addItem } from "../../redux/cart/cartAction";
 import { cartItems } from "../../redux/cart/cartSlice";
 
 function CollectionItem({ item }) {
@@ -14,7 +14,8 @@ function CollectionItem({ item }) {
   const {cartItem} = useSelector(state=>state.cartitem)
 
   const addCartItemToCart = async (cartItem,item)=>{
-   await dispatch(cartItems(cartItem,item))
+   await dispatch(addItem(cartItem,item))
+   await dispatch(accomulateCartItems(cartItem))
   }
   return (
     <div className="collectionitem">

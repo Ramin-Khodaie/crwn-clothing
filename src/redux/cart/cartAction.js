@@ -1,5 +1,5 @@
 import CartActionType from "./cartTypes";
-import { togglehidden, cartItems } from "./cartSlice";
+import { togglehidden, cartItems,accItems } from "./cartSlice";
 
 //action which toggle cart to show
 export const handleChangeHidden = () => (dispatch) => {
@@ -28,8 +28,8 @@ export const addItem = (items, itemToAdd) => (dispatch) => {
   if (exsiting) {
     items.map((item) => {
       if (item.id === itemToAdd.id) {
-        console.log(6666, item);
-        return dispatch(cartItems({ ...item, quantity: item.quantity + 1 }));
+        console.log(6666, itemToAdd);        
+        return dispatch(cartItems({...item,quantity:item.quantity + 1}));
       } else {
         return dispatch(cartItems(item));
       }
@@ -40,6 +40,8 @@ export const addItem = (items, itemToAdd) => (dispatch) => {
   return dispatch(cartItems([...items, { ...itemToAdd, quantity: 1 }]));
 };
 
-// export const accomulateCartItems = cartItem =>dispatch=>{
-//  dispatch(cartItems( cartItem.reduce((acc,item)=>acc + item.quantity,0)))
-// }
+export const accomulateCartItems = cartItem =>dispatch=>{
+  const x = cartItem.reduce((acc,item)=>acc + item.quantity,0)
+  console.log(8888,cartItem)
+ dispatch(accItems( cartItem.reduce((acc,item)=>acc + item.quantity,0)))
+}

@@ -1,8 +1,3 @@
-import {
-  auth,
-  createUserProfileDocument,
-  signinWithGoogle,
-} from "../../components/firebase-utils/firebase";
 import { useState } from "react";
 import FormInput from "../Form-input/Form-input";
 import CustomButton from "../CustomButton/CustomButton";
@@ -67,7 +62,7 @@ const SignIn = ({ history }) => {
         />
         <div className="buttons">
           <CustomButton type="submit" onClick={handleSubmit}>Sign in</CustomButton>
-          <CustomButton onClick={signinWithGoogle} isgooglesignin>
+          <CustomButton  isgooglesignin>
             {" "}
             Sign in with Google
           </CustomButton>

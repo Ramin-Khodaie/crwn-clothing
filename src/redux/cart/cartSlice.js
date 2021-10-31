@@ -4,7 +4,7 @@ import { addCartItem } from "./cartUtils";
 const initialState = {
     hidden:false,
     cartItem:[],
-    
+    accItem:[]
 }
 
 const cartSlice = createSlice({
@@ -17,11 +17,13 @@ const cartSlice = createSlice({
         },
         cartItems : (state,action)=>{
             console.log(111,state.cartItem,action)
-            state.cartItem = addCartItem(state.cartItem,action.payload)
+            state.cartItem = action.payload
         },
-    
+        accItems: (state,{payload})=>{
+            state.accItem = payload;
+        }
     }
 })
 
-export const {togglehidden,cartItems} = cartSlice.actions;
+export const {togglehidden,cartItems,accItems} = cartSlice.actions;
 export default cartSlice.reducer

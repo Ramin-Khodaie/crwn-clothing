@@ -1,4 +1,3 @@
-import { auth } from "../firebase-utils/firebase";
 import { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
@@ -13,11 +12,11 @@ function Header({ history }) {
   
   const {hidden,cartItem} = useSelector(state=>state.cartitem);
   //logging out from current account
-  const dologout = () => {
-    auth.signOut();
-    // setstate({ loggedin: false });
-    history.push("/signin");
-  };
+  // const dologout = () => {
+  //   auth.signOut();
+  //   // setstate({ loggedin: false });
+  //   history.push("/signin");
+  // };
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -31,7 +30,7 @@ function Header({ history }) {
           Contact
         </Link>
         {currentUser ? (
-          <Link className="option" to="/signin" onClick={dologout}>
+          <Link className="option" to="/signin" >
             Sign out
           </Link>
         ) : (
