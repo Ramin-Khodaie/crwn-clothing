@@ -9,6 +9,7 @@ import newUserSlice from "../redux/user/newUserSlice";
 import userSlice from "../redux/user/userSlice";
 import cartItemSlice from '../redux/cart/cartSlice';
 import  loginSlice  from "./login/loginSlice";
+import cartReducer from "./cart/cartReducer";
 const middleware = [];
 
 if (process.env.NODE_ENV === "development") {
@@ -21,7 +22,8 @@ const store = configureStore({
     collection: collectionSlice,
     newUser: newUserSlice,
     currentUser: userSlice,
-    cartitem: cartItemSlice,
+    cartitem: cartReducer,
+    cart:cartItemSlice,
     isAuth:loginSlice,
   },
 });

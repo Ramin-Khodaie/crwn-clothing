@@ -8,6 +8,8 @@ import {
 } from "./collectionSlice";
 import categories from "../../Data/shop_data";
 import {getCollection,getShopItems} from '../../api/productionService/productionApi';
+
+
 export const fetchCollection = () => async(dispatch) => {
   dispatch(fetchCollectionLoading());
 

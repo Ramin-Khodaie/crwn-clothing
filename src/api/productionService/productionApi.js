@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseURL = "http://localhost:3002/production/";
+const baseURL = "http://localhost:3001/production/";
 const addAll = baseURL + "addallproducts"
 const shopitemURL = baseURL + "shopitem"
 

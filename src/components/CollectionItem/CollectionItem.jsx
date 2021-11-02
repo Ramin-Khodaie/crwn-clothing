@@ -4,19 +4,27 @@
 
 import "./collectionitem.scss";
 import CustomButton from "../CustomButton/CustomButton";
-import { connect, useSelector,useDispatch } from "react-redux";
-import { accomulateCartItems, addItem } from "../../redux/cart/cartAction";
+import { connect, useSelector, useDispatch } from "react-redux";
+import {  addItem } from "../../redux/cart/cartAction";
 import { cartItems } from "../../redux/cart/cartSlice";
 
 function CollectionItem({ item }) {
   const dispatch = useDispatch();
   const { imageUrl, name, price } = item;
-  const {cartItem} = useSelector(state=>state.cartitem)
+  const { cartItem } = useSelector((state) => state.cartitem);
 
-  const addCartItemToCart = async (cartItem,item)=>{
-   await dispatch(addItem(cartItem,item))
-   await dispatch(accomulateCartItems(cartItem))
-  }
+  // const addCartItemToCart = (item) => {
+  //   const exsiting = cartItem.find((i) => i._id === item._id);
+  //   console.log(2222,cartItem)
+  //   if (exsiting) {
+  //     return cartItem.map((a) =>
+  //       dispatch(
+  //         cartItems(a._id === item._id ? [{ ...a, quantity: a.quantity + 1 }] : a)
+  //       )
+  //     );
+  //   }
+  //   return dispatch(cartItems([...cartItem, { ...item, quantity: 1 }]));
+  // };
   return (
     <div className="collectionitem">
       <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
@@ -24,7 +32,7 @@ function CollectionItem({ item }) {
         <span className="name">{name}</span>
         <span className="price">${price}</span>
       </div>
-      <CustomButton inverted onClick={()=>addCartItemToCart(cartItem,item)}>
+      <CustomButton inverted onClick={() => dispatch(cartItems(item))}>
         Add to cart
       </CustomButton>
     </div>
@@ -38,4 +46,4 @@ function CollectionItem({ item }) {
 // const mapDispatchToProps = (dispatch) => ({
 //   addItem: (item) => dispatch(addItem(item)),
 // });
-export default (CollectionItem);
+export default CollectionItem;

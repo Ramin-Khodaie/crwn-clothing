@@ -11,15 +11,15 @@ import { createStructuredSelector } from "reselect";
 import CustomButton from "../CustomButton/CustomButton";
 import { useDispatch,useSelector } from "react-redux";
 
-const Cartdropdown = ({ cartItems, history }) => {
+const Cartdropdown = ({  history }) => {
 
-  const {cartItem} = useSelector(state=>state.cartitem)
+  const {cartItems} = useSelector(state=>state.cartitem)
   const dispatch = useDispatch()
   return (
     <div className="cart-dropdown">
       <div className="cart-item" />
-      {cartItem.length ? (
-        cartItem.map((c) => (
+      {cartItems.length ? (
+        cartItems.map((c) => (
           <CartItem key={c.id} item={c} />
         ))
       ) : (

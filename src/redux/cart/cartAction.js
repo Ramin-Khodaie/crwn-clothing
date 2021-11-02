@@ -1,47 +1,42 @@
 import CartActionType from "./cartTypes";
-import { togglehidden, cartItems,accItems } from "./cartSlice";
+import { togglehidden, cartItems, accItems } from "./cartSlice";
 
 //action which toggle cart to show
-export const handleChangeHidden = () => (dispatch) => {
-  dispatch(togglehidden());
-};
+// export const handleChangeHidden = () => (dispatch) => {
+//   dispatch(togglehidden());
+// };
 
-// //action which add cartitem to current state.
-// export const addItem = (item) => ({
-//   type: CartActionType.ADD_ITEM,
-//   payload: item,
-// });
-// //action which remove cartitem from current state.
-// export const removeItemFromCart = (item) => ({
-//   type: CartActionType.REMOVE_ITEM_FROM_CART,
-//   payload: item,
-// });
-// //remove one item from current state
-// export const removeOneItem = (item) => ({
-//   type: CartActionType.REMOVE_ONE_ITEM,
-//   payload: item,
-// });
+export const handleChangeHidden = () => ({
+  type: CartActionType.TOGGLE_CART_HIDDEN,
+});
+//action which add cartitem to current state.
+export const addItem = (item) => ({
+  type: CartActionType.ADD_ITEM,
+  payload: item,
+});
+//action which remove cartitem from current state.
+export const removeItemFromCart = (item) => ({
+  type: CartActionType.REMOVE_ITEM_FROM_CART,
+  payload: item,
+});
+//remove one item from current state
+export const removeOneItem = (item) => ({
+  type: CartActionType.REMOVE_ONE_ITEM,
+  payload: item,
+});
 
-export const addItem = (items, itemToAdd) => (dispatch) => {
+export const addItem2 = (items, itemToAdd) => {
   const exsiting = items.find((item) => item.id === itemToAdd.id);
-
   if (exsiting) {
-    items.map((item) => {
-      if (item.id === itemToAdd.id) {
-        console.log(6666, itemToAdd);        
-        return dispatch(cartItems({...item,quantity:item.quantity + 1}));
-      } else {
-        return dispatch(cartItems(item));
-      }
-    });
+    return items.map((item) =>
+      item.id === itemToAdd.id ? { ...item, quantity: item.quantity + 1 } : item
+    );
   }
-
-  console.log(222, itemToAdd, exsiting);
-  return dispatch(cartItems([...items, { ...itemToAdd, quantity: 1 }]));
+  return [...items, { ...itemToAdd, quantity: 1 }];
 };
 
-export const accomulateCartItems = cartItem =>dispatch=>{
-  const x = cartItem.reduce((acc,item)=>acc + item.quantity,0)
-  console.log(8888,cartItem)
- dispatch(accItems( cartItem.reduce((acc,item)=>acc + item.quantity,0)))
-}
+export const accomulateCartItems = (cartItem) => (dispatch) => {
+  const x = cartItem.reduce((acc, item) => acc + item.quantity, 0);
+  console.log(8888, cartItem);
+  dispatch(accItems(cartItem.reduce((acc, item) => acc + item.quantity, 0)));
+};
