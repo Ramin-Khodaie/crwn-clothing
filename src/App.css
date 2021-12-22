@@ -2,6 +2,8 @@ body {
   font-family: "Open Sans Condensed";
   padding: 20px 40px;
   font-size: 25px;
+  background-color: #222;
+  color: #fff;
 }
 
 a {
@@ -13,4 +15,9 @@ a {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.dark {
+  color: white;
+  background-color: #222;
 }
