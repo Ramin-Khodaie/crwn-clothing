@@ -6,6 +6,7 @@ import "./header.scss";
 import CartIcon from "../CartIcon/CartIcon";
 import Cartdropdown from "../Cart-dropdown/Cart-dropdown";
 import { useTheme } from "../../context/theme/useTheme";
+import { Switcher } from "../Switcher/Switcher";
 
 function Header({ history }) {
   const { message, currentUser } = useSelector((state) => state.currentUser);
@@ -13,7 +14,8 @@ function Header({ history }) {
   const { hidden } = useSelector((state) => state.cartitem);
   const { cartItems } = useSelector((state) => state.cartitem);
   const { mode, handleToggle } = useTheme();
-  console.log(455, cartItems);
+
+  
   //logging out from current account
   // const dologout = () => {
   //   auth.signOut();
@@ -23,21 +25,24 @@ function Header({ history }) {
   return (
     <div className="header">
       <Link className="logo-container" to="/">
-        <Logo className="logo" style={{ color: mode ? "#fff" : "#222" }} />
+        <Logo className="logo" 
+        // style={{ color: mode ? "#fff" : "#222" }} 
+        />
       </Link>
 
       <div className="options">
+        <Switcher isOn={mode} toggleMode={handleToggle} />
         <Link
           className="option"
           to="/shop"
-          style={{ color: mode ? "#fff" : "#222" }}
+          // style={{ color: mode ? "#fff" : "#222" }}
         >
           Shop
         </Link>
         <Link
           className="option"
           to="/shop"
-          style={{ color: mode ? "#fff" : "#222" }}
+          // style={{ color: mode ? "#fff" : "#222" }}
         >
           Contact
         </Link>
@@ -45,7 +50,7 @@ function Header({ history }) {
           <Link
             className="option"
             to="/signin"
-            style={{ color: mode ? "#fff" : "#222" }}
+            // style={{ color: mode ? "#fff" : "#222" }}
           >
             Sign out
           </Link>
@@ -53,7 +58,7 @@ function Header({ history }) {
           <Link
             className="option"
             to="/signin"
-            style={{ color: mode ? "#fff" : "#222" }}
+            // style={{ color: mode ? "#fff" : "#222" }}
           >
             Sign in
           </Link>

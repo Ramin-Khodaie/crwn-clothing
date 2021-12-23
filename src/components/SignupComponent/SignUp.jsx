@@ -32,7 +32,7 @@ const dispatch = useDispatch();
       confirmPassword: state.confirmPassword,
     };
     if (state.password !== state.confirmPassword) {
-      alert('password dosent match.')
+      alert('password doesnt match.')
     }
     try {
       dispatch(newUser(user))

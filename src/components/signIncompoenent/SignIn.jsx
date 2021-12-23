@@ -3,18 +3,22 @@ import FormInput from "../Form-input/Form-input";
 import CustomButton from "../CustomButton/CustomButton";
 import { withRouter } from "react-router-dom";
 import { doLogin } from "../../redux/user/userAction";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./signin.scss";
+import useNotify from "../../context/notify/useNotify";
 const SignIn = ({ history }) => {
   const [state, setState] = useState({
     email: "",
     password: "",
   });
 
+  const notify = useNotify();
   const dispatch = useDispatch();
-  const {status,currentUser,error} = useSelector(state=>state.currentUser)
-  
+  const { status, currentUser, error } = useSelector(
+    (state) => state.currentUser
+  );
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
@@ -22,21 +26,25 @@ const SignIn = ({ history }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const {email,password} = state;
-    const data = {email,password}
-    
-    const res = await dispatch(doLogin(data));
-      console.log(555,res)
-      if(res.payload.status === "success"){
-        history.push("/");
-        setState({
-          email:"",
-          password:""
-        })
-      }
-      if(res.payload.status === "error"){
-        alert(res.payload.message)
-      }
+    const { email, password } = state;
+    const data = { email, password };
+
+    const res = dispatch(doLogin(data))
+      .then((d) => {
+        console.log(3344, d);
+        if (d.payload === "Invalid email or password") {
+          notify(d.payload);
+        }
+        if (d.payload.status === "success") {
+          notify("logged in successfully");
+          history.push("/");
+          setState({
+            email: "",
+            password: "",
+          });
+        }
+      })
+      .catch((err) => notify(err));
   };
   return (
     <div className="signin">
@@ -61,11 +69,10 @@ const SignIn = ({ history }) => {
           value={state.password}
         />
         <div className="buttons">
-          <CustomButton type="submit" onClick={handleSubmit}>Sign in</CustomButton>
-          <CustomButton  isgooglesignin>
-            {" "}
-            Sign in with Google
+          <CustomButton type="submit" onClick={handleSubmit}>
+            Sign in
           </CustomButton>
+          <CustomButton isgooglesignin> Sign in with Google</CustomButton>
         </div>
       </form>
     </div>

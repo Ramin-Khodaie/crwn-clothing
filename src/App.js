@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import HomePage from "./pages/Home/Homepage";
 import Header from "./components/Header/Header";
 import About from "./pages/About/AboutPage";
@@ -18,21 +18,17 @@ import {
 import CheckoutPage from "./pages/Chechout/Checkoutpage";
 import { fecthProducts } from "./redux/shop/productAction";
 import { useTheme } from "./context/theme/useTheme";
+import { ThemeContext } from "./context/theme/themeContext";
 
 const App = ({ currentUser }) => {
-  const { mode } = useTheme();
-  const classArray = ["App"];
-  if (mode) {
-    classArray.push("dark");
-  }
-  console.log(4433, mode);
   const dispatch = useDispatch();
   useEffect(() => {
     // dispatch(fecthProducts(products));
     dispatch(fecthProducts());
   }, []);
+  const { theme } = useTheme();
   return (
-    <div className='App' style={{backgroundColor:mode ? '#222' : '',color:mode?"#fff":''}}>
+    <div className="App">
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />

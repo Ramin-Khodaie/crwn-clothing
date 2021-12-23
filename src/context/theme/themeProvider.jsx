@@ -1,12 +1,13 @@
-import { ThemeContext } from "./themeContext";
+import { ThemeContext, themes } from "./themeContext";
 import { useState } from "react";
 
 export const ThemeProvider = ({ children }) => {
-  const [mode, setMode] = useState(true);
+  const [theme, setTheme] = useState(themes.dark);
 
-  const handleToggle = () => setMode((previousState) => !previousState);
+  const handleToggleMode = () =>
+    theme === themes.dark ? setTheme(themes.light) : setTheme(themes.light);
   return (
-    <ThemeContext.Provider value={{mode, handleToggle}}>
+    <ThemeContext.Provider value={{ theme, handleToggleMode }}>
       {children}
     </ThemeContext.Provider>
   );
