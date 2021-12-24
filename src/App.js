@@ -19,6 +19,9 @@ import CheckoutPage from "./pages/Chechout/Checkoutpage";
 import { fecthProducts } from "./redux/shop/productAction";
 import { useTheme } from "./context/theme/useTheme";
 import { ThemeContext } from "./context/theme/themeContext";
+import PrivateRoute from "./components/PrivateRout/privateRoute";
+import Category from "./pages/Category/CategoryPage";
+import CollectionOverview from "./components/ColectionOverview/CollectionOverview";
 
 const App = ({ currentUser }) => {
   const dispatch = useDispatch();
@@ -29,17 +32,23 @@ const App = ({ currentUser }) => {
   const { theme } = useTheme();
   return (
     <div className="App">
-      <Header />
+      <Route path="/signin" component={SignInPage} />
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/about" component={About} />
-        <Route exact path="/checkout" component={CheckoutPage} />
-        <Route
-          path="/signin"
-          exact
-          render={() => (currentUser ? <Redirect to="/" /> : <SignInPage />)}
-        />
-        <Route path="/shop" component={ShopPage} />
+        <PrivateRoute path="/" exact>
+          <HomePage />
+        </PrivateRoute>
+        <PrivateRoute path="/about">
+          <About />
+        </PrivateRoute>
+        <PrivateRoute path="/checkout">
+          <CheckoutPage />
+        </PrivateRoute>
+        <PrivateRoute path="/shop" exact>
+          <CollectionOverview />
+        </PrivateRoute>
+        <PrivateRoute path={`/shop/:_id`}>
+          <Category />
+        </PrivateRoute>
       </Switch>
     </div>
   );

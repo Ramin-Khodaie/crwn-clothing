@@ -1,14 +1,10 @@
 import "./Modal.css";
 import Backdrop from "../Backdrop/Backdrop";
 import React, { useEffect } from "react";
-import Spinner from "../Spinner/Spinner";
 
 const Modal = React.memo((props) => {
-  console.log(111, props);
-
   return (
     <>
-      
       <Backdrop show={props.show} close={props.closeBackdrop} />
       <div
         className="Modal"

@@ -10,6 +10,7 @@ export const userLogin = (data) =>{
     return new Promise(async (resolve,reject)=>{
         try {
             const res = await axios.post(loginURL,data)
+           
             if(res.status === 200){
                 resolve(res.data)
             }

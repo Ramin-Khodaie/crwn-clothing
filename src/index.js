@@ -8,17 +8,18 @@ import { useState } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./context/theme/themeProvider";
+import { NotifyProvider } from "./context/notify/NotifyProvider";
 import { useTheme } from "./context/theme/useTheme";
 
-
 ReactDOM.render(
-  <ThemeProvider>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </ThemeProvider>,
-
+  <NotifyProvider>
+    <ThemeProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </ThemeProvider>
+  </NotifyProvider>,
   document.getElementById("root")
 );

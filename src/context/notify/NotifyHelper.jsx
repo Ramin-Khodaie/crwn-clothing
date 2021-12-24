@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NotifyContext } from "./NotifyContext";
-import { Modal } from "../../components/Modal/Modal";
+import Modal from "../../components/Modal/Modal";
 export const NotifyHelper = () => {
   const context = useContext(NotifyContext);
 
@@ -22,10 +22,10 @@ export const NotifyHelper = () => {
   );
 };
 
-function ShowMassage(message) {
+function ShowMassage({message}) {
   return (
-    <div>
-      <h3 style={{ textAlig: "center" }}>{message}</h3>
+    <div style={{ textAlign:"center"}}>
+      <h3 >{message}</h3>
     </div>
   );
 }

@@ -6,9 +6,11 @@ export const NotifyProvider = ({ children }) => {
     notify: () => {},
   };
   return (
-    <NotifyContext.Provider value={contextValue}>
-      {children}
-      <NotifyContext />
-    </NotifyContext.Provider>
+    <>
+      <NotifyContext.Provider value={contextValue}>
+        {children}
+        <NotifyHelper />
+      </NotifyContext.Provider>
+    </>
   );
 };

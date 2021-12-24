@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 import { ReactComponent as Logo } from "../../assets/images/icon.svg";
@@ -15,7 +14,6 @@ function Header({ history }) {
   const { cartItems } = useSelector((state) => state.cartitem);
   const { mode, handleToggle } = useTheme();
 
-  
   //logging out from current account
   // const dologout = () => {
   //   auth.signOut();
@@ -25,41 +23,23 @@ function Header({ history }) {
   return (
     <div className="header">
       <Link className="logo-container" to="/">
-        <Logo className="logo" 
-        // style={{ color: mode ? "#fff" : "#222" }} 
-        />
+        <Logo className="logo" />
       </Link>
 
       <div className="options">
         <Switcher isOn={mode} toggleMode={handleToggle} />
-        <Link
-          className="option"
-          to="/shop"
-          // style={{ color: mode ? "#fff" : "#222" }}
-        >
+        <Link className="option" to="/shop">
           Shop
         </Link>
-        <Link
-          className="option"
-          to="/shop"
-          // style={{ color: mode ? "#fff" : "#222" }}
-        >
+        <Link className="option" to="/shop">
           Contact
         </Link>
         {currentUser ? (
-          <Link
-            className="option"
-            to="/signin"
-            // style={{ color: mode ? "#fff" : "#222" }}
-          >
+          <Link className="option" to="/signin">
             Sign out
           </Link>
         ) : (
-          <Link
-            className="option"
-            to="/signin"
-            // style={{ color: mode ? "#fff" : "#222" }}
-          >
+          <Link className="option" to="/signin">
             Sign in
           </Link>
         )}

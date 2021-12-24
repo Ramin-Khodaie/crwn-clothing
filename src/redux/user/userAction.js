@@ -17,15 +17,18 @@ export const doLogin = (data) => async (dispatch) => {
   try {
     const result = await userLogin(data);
     if (result.status === "success") {
-      console.log(400, result);
-      sessionStorage.setItem("at",result.accessToken);
-      localStorage.setItem("rt",result.refreshToken);
-      dispatch(loginsuccess())
+      sessionStorage.setItem("at", result.accessToken);
+      localStorage.setItem("rt", result.refreshToken);
+      dispatch(loginsuccess());
       return dispatch(fetchUserSuccess(result));
+    }
+    if (result.status === "error") {
+      console.log(400, result);
+      return dispatch(fetchUserFail(result));
     }
     // return dispatch(fetchUserFail(result));
   } catch (error) {
-    dispatch(fetchUserFail(error));
+    return dispatch(fetchUserFail(error));
   }
 };
 

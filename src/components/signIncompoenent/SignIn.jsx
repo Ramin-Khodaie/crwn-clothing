@@ -4,9 +4,9 @@ import CustomButton from "../CustomButton/CustomButton";
 import { withRouter } from "react-router-dom";
 import { doLogin } from "../../redux/user/userAction";
 import { useDispatch, useSelector } from "react-redux";
-
 import "./signin.scss";
 import useNotify from "../../context/notify/useNotify";
+
 const SignIn = ({ history }) => {
   const [state, setState] = useState({
     email: "",
@@ -29,11 +29,11 @@ const SignIn = ({ history }) => {
     const { email, password } = state;
     const data = { email, password };
 
-    const res = dispatch(doLogin(data))
+    const res = await dispatch(doLogin(data))
       .then((d) => {
         console.log(3344, d);
-        if (d.payload === "Invalid email or password") {
-          notify(d.payload);
+        if (d.payload.message === "Invalid email or password") {
+          notify(d.payload.message);
         }
         if (d.payload.status === "success") {
           notify("logged in successfully");
