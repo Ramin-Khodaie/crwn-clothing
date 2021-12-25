@@ -5,8 +5,15 @@
 import { Link, withRouter } from "react-router-dom";
 
 import "./directoryitem.scss";
-function DirectoryItem({ title, _id, history, imageUrl, match, linkUrl, size }) {
-  console.log(222,match)
+function DirectoryItem({
+  title,
+  _id,
+  history,
+  imageUrl,
+  match,
+  linkUrl,
+  size,
+}) {
   return (
     <div
       className={`${size} directory-item`}

@@ -4,11 +4,18 @@
 
 import DirectoryItem from "../DirectoryItem/DirectoryItem";
 import "./directory.scss";
-import { connect } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fecthProducts } from "../../redux/shop/productAction";
+import Progress from "../Progressbar/Progress";
 
 const Directory = () => {
-  const { products } = useSelector((state) => state.products);
+  const { products, isLoading } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fecthProducts());
+  }, []);
+
   return (
     <div className="directory">
       {products ? (
@@ -17,7 +24,7 @@ const Directory = () => {
         ))
       ) : (
         <div style={{ flex: "auto", textAlign: "center" }}>
-          <h1>there is no sections</h1>
+          <Progress />
         </div>
       )}
     </div>

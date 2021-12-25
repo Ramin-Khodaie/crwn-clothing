@@ -4,34 +4,28 @@
 
 import { connect, useDispatch, useSelector } from "react-redux";
 import Collection from "../Collection/Collection";
-import { createStructuredSelector } from "reselect";
-import { selectShopItems } from "../../redux/shop/shopSelectore";
-
 import { fetchCollection } from "../../redux/collection/collectionAction";
 import { useEffect } from "react";
-
 import { withRouter } from "react-router";
+import Progress from "../Progressbar/Progress";
 
 const CollectionOverview = (props) => {
   const dispatch = useDispatch();
-  const { collection } = useSelector((state) => state.collection);
+  const { collection, isLoading } = useSelector((state) => state.collection);
   useEffect(() => {
-    console.log(1009,collection)
+    console.log(1009, collection);
     dispatch(fetchCollection(collection));
   }, []);
 
-  console.log(555, collection);
+  if (isLoading) {
+    return <Progress />;
+  }
   return (
     <div>
-      {collection ? (
+      {collection &&
         collection.map(({ id, ...otherProps }) => (
           <Collection key={id} {...otherProps} />
-        ))
-      ) : (
-        <div style={{ flex: "auto", textAlign: "center" }}>
-          <h1>there is no item</h1>
-        </div>
-      )}
+        ))}
     </div>
   );
 };

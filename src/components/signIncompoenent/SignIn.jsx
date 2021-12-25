@@ -35,8 +35,7 @@ const SignIn = ({ history }) => {
         if (d.payload.message === "Invalid email or password") {
           notify(d.payload.message);
         }
-        if (d.payload.status === "success") {
-          notify("logged in successfully");
+        if (d.payload.status === "success") {         
           history.push("/");
           setState({
             email: "",

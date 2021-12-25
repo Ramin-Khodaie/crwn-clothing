@@ -4,10 +4,7 @@ import HomePage from "./pages/Home/Homepage";
 import Header from "./components/Header/Header";
 import About from "./pages/About/AboutPage";
 import SignInPage from "./pages/signIn/signInPage";
-import ShopPage from "./pages/Shop/ShopPage";
 import { useDispatch } from "react-redux";
-import { addAllProductstoMongo } from "./redux/shop/productAction";
-
 import {
   BrowserRouter,
   Redirect,
@@ -22,12 +19,13 @@ import { ThemeContext } from "./context/theme/themeContext";
 import PrivateRoute from "./components/PrivateRout/privateRoute";
 import Category from "./pages/Category/CategoryPage";
 import CollectionOverview from "./components/ColectionOverview/CollectionOverview";
+import ContactPage from "./pages/Contact/ContactPage";
 
-const App = ({ currentUser }) => {
+const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     // dispatch(fecthProducts(products));
-    dispatch(fecthProducts());
+    
   }, []);
   const { theme } = useTheme();
   return (
@@ -48,6 +46,9 @@ const App = ({ currentUser }) => {
         </PrivateRoute>
         <PrivateRoute path={`/shop/:_id`}>
           <Category />
+        </PrivateRoute>
+        <PrivateRoute path={`/contact`}>
+          <ContactPage />
         </PrivateRoute>
       </Switch>
     </div>

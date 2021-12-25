@@ -1,11 +1,15 @@
-import { userLogin, createNewUser } from "../../api/userServices/userApi";
+import {
+  userLogin,
+  createNewUser,
+  logout,
+} from "../../api/userServices/userApi";
 import { fetchUserFail, fetchUserLoading, fetchUserSuccess } from "./userSlice";
 import {
   createUserLoading,
   createUserSuccess,
   createUserFail,
 } from "./newUserSlice";
-import { loginsuccess } from "../login/loginSlice";
+import { loginsuccess, logoutsuccess } from "../login/loginSlice";
 export const setCurrentUser = (user) => ({
   type: "SET_CURRENT_USER",
   payload: user,
@@ -41,5 +45,22 @@ export const newUser = (user) => async (dispatch) => {
       return dispatch(createUserSuccess(result.message));
   } catch (error) {
     dispatch(createUserFail());
+  }
+};
+
+export const userLogout = () => async (dispatch) => {
+  dispatch(fetchUserLoading);
+
+  try {
+    const res = await logout();
+    if (res.status === "success") {
+      dispatch(logoutsuccess());
+      return dispatch(fetchUserSuccess(""));
+    }
+    if (res.status === "error") {
+      return dispatch(fetchUserFail(res));
+    }
+  } catch (error) {
+    dispatch(fetchUserFail());
   }
 };
