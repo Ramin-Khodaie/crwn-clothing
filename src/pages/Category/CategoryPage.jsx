@@ -13,7 +13,7 @@ const Category = ({ match }) => {
   );
 
   useEffect(() => {
-    // dispatch(selectCategory(match.params._id));
+    dispatch(selectCategory(match.params._id));
   }, []);
 
   const { title, items } = selectedCategory;

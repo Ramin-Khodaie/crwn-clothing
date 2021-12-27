@@ -5,8 +5,7 @@ const StripButton = ({ price }) => {
   const publicKey =
     "pk_test_51JIHEIB2dgAvXNQgVECHFybGNR1245sQ4owGWbUNhtIXVQO8OOMJpU1t1azmjWatNb1mPzOs62yIeXXmII5JxY3y00wJJnZJIj";
 
-  const onToken = (token) => {
-    console.log(3333, token);
+  const onToken = (token) => {    
     alert("payment successful.");
   };
   return (

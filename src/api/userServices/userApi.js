@@ -43,9 +43,11 @@ export const logout = () => {
         },
       });
       if (res.status === 200) {
+        console.log(9988, res);
         resolve(res.data);
       }
     } catch (error) {
+      console.log(998, error);
       reject(error);
     }
   });

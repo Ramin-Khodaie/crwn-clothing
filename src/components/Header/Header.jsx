@@ -7,7 +7,7 @@ import Cartdropdown from "../Cart-dropdown/Cart-dropdown";
 import { useTheme } from "../../context/theme/useTheme";
 import { Switcher } from "../Switcher/Switcher";
 import useNotify from "../../context/notify/useNotify";
-import {userLogout} from '../../redux/user/userAction'
+import { userLogout } from "../../redux/user/userAction";
 
 function Header({ history }) {
   const { message, currentUser } = useSelector((state) => state.currentUser);
@@ -20,7 +20,6 @@ function Header({ history }) {
 
   //logging out from current account
   const dologout = async () => {
-    console.log(9988, "its me");
     await dispatch(userLogout());
 
     notify("loguot successfuly");
@@ -51,7 +50,7 @@ function Header({ history }) {
             Sign in
           </Link>
         )}
-        {!currentUser && <CartIcon itemCount={cartItems && cartItems.length} />}
+        {currentUser && <CartIcon itemCount={cartItems && cartItems.length} />}
       </div>
       {hidden && <Cartdropdown />}
     </div>

@@ -31,7 +31,6 @@ export const addCartItem = (cartItems, cartitemtoadd) => {
     but if if it is equal to 1 then action will remove the item at all.
  */
 export const removeOnecartItem = (cartItems, cartitemtoremove) => {
-  console.log(4300, cartItems, cartitemtoremove);
   const existing = cartItems.find(
     (cartitem) => cartitem.id === cartitemtoremove.id
   );
@@ -45,6 +44,17 @@ export const removeOnecartItem = (cartItems, cartitemtoremove) => {
         : cartitem
     );
   }
+};
 
-  // return [...cartItems, { ...cartitemtoremove, quantity: 1 }];
+/**
+ *
+ * @param {array of objects} cartItems
+ * @param {object} cartItem
+ * @returns
+ */
+export const deleteCartItem = (cartItems, cartItem) => {
+  if (!cartItem) {
+    return null;
+  }
+  return cartItems.filter((c) => c._id !== cartItem._id);
 };

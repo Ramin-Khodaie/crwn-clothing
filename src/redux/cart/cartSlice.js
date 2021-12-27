@@ -1,30 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addItem2 } from "./cartAction";
-import { addCartItem } from "./cartUtils";
+import { addCartItem, removeOnecartItem, deleteCartItem } from "./cartUtils";
 
 const initialState = {
-    hidden:false,
-    cartItem:[],
-    accItem:[]
-}
+  hidden: false,
+  cartItems: [],
+};
 
 const cartSlice = createSlice({
-    name:"cartitem",
-    initialState:initialState,
-    reducers:{
-        togglehidden : (state)=>{
-            
-            state.hidden = !state.hidden
-        },
-        cartItems : (state,action)=>{
-            console.log(111,state.cartItem,action)
-            state.cartItem = addItem2(state.cartItem,action.payload)
-        },
-        accItems: (state,{payload})=>{
-            state.accItem = payload;
-        }
-    }
-})
+  name: "cartitem",
+  initialState: initialState,
+  reducers: {
+    togglehidden: (state) => {
+      state.hidden = !state.hidden;
+    },
+    AddCartItems: (state, { payload }) => {
+      state.cartItems = addCartItem(state.cartItems, payload);
+    },
+    RemoveCartItem: (state, { payload }) => {
+      state.cartItems = removeOnecartItem(state.cartItems, payload);
+    },
+    DeleteCartItem: (state, { payload }) => {
+      state.cartItems = deleteCartItem(state.cartItems, payload);
+    },
+  },
+});
 
-export const {togglehidden,cartItems,accItems} = cartSlice.actions;
-export default cartSlice.reducer
+export const {
+  togglehidden,
+  AddCartItems,
+  accItems,
+  RemoveCartItem,
+  DeleteCartItem,
+} = cartSlice.actions;
+export default cartSlice.reducer;
