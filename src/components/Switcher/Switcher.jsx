@@ -11,7 +11,7 @@ export const Switcher = ({ isOn, toggleMode }) => {
         checked={isOn}
       />
       <label className="react-switch-label" htmlFor="mode">
-        <span style={{ background: !isOn && '#06D6A0' }} className="react-switch-button"></span>
+        <span style={{ background: !isOn && '#d28e5f' }} className="react-switch-button"></span>
       </label>
     </>
   );
