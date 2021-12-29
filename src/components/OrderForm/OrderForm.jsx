@@ -13,41 +13,55 @@ const OrderForm = () => {
     city: "",
     street: "",
   };
-  const [state, setState] = useState(formInfo);
 
+  const [validInputs, setValidInputs] = useState({
+    email: false,
+    phone: false,
+    zipcode: false,
+  });
+  const [state, setState] = useState(formInfo);
+  const [isFormvalid,setIsFormvalid] = useState(false)
   const formValidation = (name, value) => {
     if (!name || !value) {
       return;
     }
     switch (name) {
       case "zipcode":
-        const re1 = /0-9/;
-        return re1.test(value) ;
+        return /^[0-9]+$/.test(value) && value.length === 5;
+
       case "email":
-        const re =
-          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(value);
+        return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          value
+        );
+
       case "phone":
-        const re2 = /^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}/;
-        return re2.test(value) && value.length === 11;
+        return /^[0-9]+$/.test(value) && value.length === 11;
+
       default:
         break;
     }
   };
-
-  const validEmail = formValidation("zipcode", state.zipcode);
-  console.log(8899, validEmail);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
+    const validinputs = formValidation(name, value);
+    setValidInputs({ ...validInputs, [name]: true });
+    setIsFormvalid(Object.values(validInputs).every(Boolean))
   };
-
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(isFormvalid){
+      console.log(999,"lets goo")
+    }
+  };
   return (
     <div className="OrderForm">
       <div className="title">
         <h3>fill the form</h3>
       </div>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="form__group">
           <input
             className="form__input"
@@ -138,7 +152,7 @@ const OrderForm = () => {
           <label className="form__label">Street</label>
         </div>
         <div className="form__btn">
-          <CustomButton>Order</CustomButton>
+          <CustomButton type="submit">Order</CustomButton>
         </div>
       </form>
     </div>
