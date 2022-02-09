@@ -31,11 +31,10 @@ const SignIn = ({ history }) => {
 
     const res = await dispatch(doLogin(data))
       .then((d) => {
-        console.log(3344, d);
         if (d.payload.message === "Invalid email or password") {
           notify(d.payload.message);
         }
-        if (d.payload.status === "success") {         
+        if (d.payload.status === "success") {
           history.push("/");
           setState({
             email: "",

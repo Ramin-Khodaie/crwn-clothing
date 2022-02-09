@@ -20,6 +20,7 @@ import PrivateRoute from "./components/PrivateRout/privateRoute";
 import Category from "./pages/Category/CategoryPage";
 import CollectionOverview from "./components/ColectionOverview/CollectionOverview";
 import ContactPage from "./pages/Contact/ContactPage";
+import useNotify from "./context/notify/useNotify";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const App = () => {
     
   }, []);
   const { theme } = useTheme();
+  
   return (
     <div className="App">
       <Route path="/signin" component={SignInPage} />

@@ -1,14 +1,19 @@
 import CustomButton from "../CustomButton/CustomButton";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { makeOrder } from "../../api/orderServices/orderApi";
+import { ResetCartItems } from "../../redux/cart/cartSlice";
 
 import "./OrderForm.scss";
+import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
+import useNotify from "../../context/notify/useNotify";
 
-const OrderForm = () => {
+const OrderForm = ({ history }) => {
   const formInfo = {
-    name: "",
+    fullName: "",
     email: "",
     phone: "",
-    zipcode: "",
+    zipCode: "",
     province: "",
     city: "",
     street: "",
@@ -17,10 +22,17 @@ const OrderForm = () => {
   const [validInputs, setValidInputs] = useState({
     email: false,
     phone: false,
-    zipcode: false,
+    zipCode: false,
   });
+
   const [state, setState] = useState(formInfo);
-  const [isFormvalid,setIsFormvalid] = useState(false)
+  const [isFormvalid, setIsFormvalid] = useState(false);
+
+  const { cartItems } = useSelector((state) => state.cartitem);
+  const dispatch = useDispatch();
+
+  const notify = useNotify();
+
   const formValidation = (name, value) => {
     if (!name || !value) {
       return;
@@ -41,20 +53,29 @@ const OrderForm = () => {
         break;
     }
   };
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
     const validinputs = formValidation(name, value);
     setValidInputs({ ...validInputs, [name]: true });
-    setIsFormvalid(Object.values(validInputs).every(Boolean))
+    setIsFormvalid(Object.values(validInputs).every(Boolean));
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(isFormvalid){
-      console.log(999,"lets goo")
+    if (isFormvalid) {
+      const order = {
+        cartitems: cartItems,
+        userinfo: state,
+      };
+      makeOrder(order)
+        .then((data) => {
+          dispatch(ResetCartItems());
+        })
+        .catch((error) => notify(error));
     }
+    history.push("/");
   };
   return (
     <div className="OrderForm">
@@ -67,7 +88,7 @@ const OrderForm = () => {
             className="form__input"
             type="text"
             placeholder="Name"
-            name="name"
+            name="fullName"
             required
             value={state.name}
             onChange={handleChange}
@@ -104,8 +125,8 @@ const OrderForm = () => {
             type="type"
             placeholder="Zip-Code"
             required
-            name="zipcode"
-            value={state.zipcode}
+            name="zipCode"
+            value={state.zipCode}
             onChange={handleChange}
           />
           <label className="form__label">Zip-Code</label>
@@ -119,6 +140,9 @@ const OrderForm = () => {
             value={state.province}
             onChange={handleChange}
           >
+            <option selected disabled>
+              Select an Option
+            </option>
             <option className="form-options">LA</option>
             <option className="form-options">NY</option>
             <option className="form-options">WD</option>
@@ -134,6 +158,9 @@ const OrderForm = () => {
             value={state.city}
             onChange={handleChange}
           >
+            <option selected disabled>
+              Select an Option
+            </option>
             <option className="form-options">LA</option>
             <option className="form-options">NY</option>
             <option className="form-options">WD</option>
@@ -159,4 +186,4 @@ const OrderForm = () => {
   );
 };
 
-export default OrderForm;
+export default withRouter(OrderForm);
